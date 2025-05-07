@@ -9,6 +9,7 @@
 
 <body>
     <form action="login_novo_salvar.php" method="post">
+        <h1>ERRO-LOGIN NAO ENCONTRADO </h1>
         <legend>CRIE UM LOGIN</legend><br />
         <div>
             <span> USUÁRIO : </span>

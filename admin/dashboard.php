@@ -1,35 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <!-- basic -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fut Camisas</title>
-  <link rel="icon" type="image/png" href="\images\bolatitle.png">
-  <!-- bootstrap css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <!-- style css -->
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <!-- owl stylesheets -->
-  <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext" rel="stylesheet">
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesoeet" href="css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-
-<body>
-
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center p-2">
-      <span>Seja bem-vindo(a)</span>
-      <a href="logout.php" class="btn btn-danger">Logout</a>
-    </div>
-  </div>
-
-
-
-
 <?php
 /* esse bloco de código em php verifica se existe a sessão, pois o usuário pode
  simplesmente não fazer o login e digitar na barra de endereço do seu navegador
@@ -70,6 +38,27 @@ foreach ($resultado3 as $linha3);
 
 
 ?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- basic -->
+  
+  <title>Fut Camisas</title>
+  <link rel="icon" type="image/png" href="\images\bolatitle.png">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center p-2">
+      <span>Seja bem-vindo(a) <?php echo $logado; ?> </span>
+      <a href="logout.php" class="btn btn-danger">Logout</a>
+    </div>
+  </div>
 
   <!--aplica estilos próprios para a parte de cima do cabeçalho (como altura, cor, fonte, espaçamento, etc.). -->
   <div class="row">
