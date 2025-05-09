@@ -1,5 +1,20 @@
 <?php
-include('../admin/banco.php');  
+/* esse bloco de código em php verifica se existe a sessão, pois o usuário pode
+ simplesmente não fazer o login e digitar na barra de endereço do seu navegador
+o caminho para a página principal do site (sistema), burlando assim a obrigação de
+fazer um login, com isso se ele não estiver feito o login não será criado a session,
+então ao verificar que a session não existe a página redireciona o mesmo
+ para a index.php.*/
+session_start();
+if(!isset ($_SESSION['usuario']) && !isset ($_SESSION['senha']))
+{
+  header('location:/Area_Publica/index.php');
+}
+
+include('../admin/banco.php');
+
+$logado = $_SESSION['usuario'];
+
 
 $consulta_produtos1 = "SELECT NOME,PRECO 
                        FROM PRODUTOS 
@@ -21,7 +36,6 @@ foreach ($resultado1 as $linha1);
 foreach ($resultado2 as $linha2);
 foreach ($resultado3 as $linha3);
 
-$stmt = $con->query("SELECT id, nome FROM categorias");
 
 ?>
 
@@ -35,9 +49,25 @@ $stmt = $con->query("SELECT id, nome FROM categorias");
 </head>
 <body>
 
-<div class = "container-login" >
-    <a href="/admin/login.php" class="btn-login">Login</a>
+<div class="container">
+  <div class="d-flex">
+    <span>Seja bem-vindo(a) <?php echo $logado; ?></span>
+    <a href="logout.php" class="btn-logout">Logout</a>
+  </div>
 </div>
+
+
+  <header class="topo">
+    <h1>Destaques</h1>
+    <nav>
+      <ul class="menu">
+            <li><a href="categorias\index.php">Categorias</a></li>
+            <li><a href="produtos\index.php">Produtos</a></li>
+            <li><a href="vendas\index.php">Vendas</a></li>
+      </ul>
+    </nav>
+    
+  </header>
 
   <section class="produtos-section">
     <h2 class="titulo">Destaques</h2>
