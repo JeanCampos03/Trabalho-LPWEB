@@ -99,6 +99,14 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
   <a href="/admin/login.php" class="btn-login">Login</a>
 </div>
 
+<div class="container-filtro"> 
+  <a href="teste.php" class ="filtro-todos">Todos</a>
+  <a href="teste.php" class ="filtro-todos">Times Brasileiros</a>
+  <a href="teste.php" class ="filtro-todos">Times Europeus</a>
+  <a href="index.php" class ="filtro-todos">Destaques</a>
+
+</div>
+
 <h2 class="titulo">🔥 Destaques</h2>
 <div class="produtos-grid">
   <?php if (count($destaques) > 0): ?>
@@ -106,7 +114,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
       <div class="produto">
         <img src="/images/<?php echo $produto['id']; ?>.png" alt="<?php echo $produto['nome']; ?>">
         <h3><?php echo $produto['nome']; ?></h3>
-        <p class="preco">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
+        <p class="preco">R$ <?php echo number_format($produto['preco'], 1, ',', '.'); ?></p>
         <!---<a href="#">Comprar</a>-->
         <a href="compra.php?id=<?php echo $produto['id']; ?>">Comprar</a>
       </div>
