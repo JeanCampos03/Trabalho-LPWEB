@@ -1,5 +1,5 @@
 <?php
-include('../admin/banco.php');  
+include('../admin/banco.php');  //pedro
 
 $consulta_produtos1 = "SELECT NOME,PRECO 
                        FROM PRODUTOS 
