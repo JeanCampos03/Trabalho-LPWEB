@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <title>Fut Camisas</title>
-<link rel="icon" type="image/png" href="/images/bolatitle.png">
+<link rel="icon" type="image/png" href="/images/title.png">
 
 <?php
 include("banco.php");

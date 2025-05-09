@@ -3,12 +3,12 @@
 <head>
 
     <title>CADASTRAR</title>
-    <link rel="icon" type="image/png" href="/images/bolatitle.png">
+    <link rel="icon" type="image/png" href="/images/title.png">
 
 </head>
 
 <body>
-    <form action="cadastrar_produto_salvar.php" method="post">
+    <form action="produtos_cadastrar_salvar.php" method="post">
         <legend>CADASTRO DE PRODUTOS</legend><br />
         
         <div>

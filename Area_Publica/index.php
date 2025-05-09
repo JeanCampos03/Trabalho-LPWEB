@@ -1,5 +1,5 @@
 <?php
-include('C:\xampp\htdocs\admin\banco.php');
+include('../admin/banco.php');
 
 $consulta_produtos1 = "SELECT NOME,PRECO 
                        FROM PRODUTOS 
@@ -21,65 +21,50 @@ foreach ($resultado1 as $linha1);
 foreach ($resultado2 as $linha2);
 foreach ($resultado3 as $linha3);
 
-?>
+$stmt = $con->query("SELECT id, nome FROM categorias");
 
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-   <head>
-      
-   <link rel="icon" type="image/png" href="/images/bolatitle.png">
-   <!-- bootstrap css -->
-   <link rel="stylesheet" type="text/css" href="/admin/css/bootstrap.min.css">
-   <link rel="stylesheet" type="text/css" href="/admin/css/style.css">
- 
-   </head>
-   <body>
+<head>
+  <meta charset="UTF-8">
+  <title> FUT CAMISAS</title>
+  <link rel="icon" type="image/png" href="/images/title.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
 
-   <div class= "container p-2" >
-   <link rel="stylesheet" type="text/css" href="css/style.css">
-   <div style="display: flex;">
-   <ul style="margin-left: auto;">
-         <a href="/admin/login.php" class="btn btn-success"> Logar </a>
-   </ul>
-   </div>
-      <h1 class="fashion_taital">Destaques</h1>
-       
-      <div class='container'>
-    <div class='fashion_section_2'>
-      <div class='row'>
-        <div class='col-lg-4 col-sm-4'>
-          <div class='box_main'>
-            <h4 class='shirt_text'> <?php echo $linha2['NOME'] ?> </h4>
-            <p class='price_text'>Preço : <span style='color:#262626;'> <?php echo $linha2['PRECO']; ?> </span></p>
-            <div class='tshirt_img'><img src='/images/palmeiras.png'></div> 
-            <div class='btn_main'>
-              <div class='seemore_bt'><a href='#'>Comprar</a></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <div class="box_main">
-            <h4 class="shirt_text"> <?php echo $linha1['NOME'] ?> </h4>
-            <p class="price_text">Preço : <span style="color:#262626;"> <?php echo $linha1['PRECO']; ?></span></p>
-            <div class="tshirt_img"><img src="/images/spfc.png"></div>
-            <div class="btn_main">
-              <div class="seemore_bt"><a href="#">Comprar</a></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <div class="box_main">
-            <h4 class="shirt_text"> <?php echo $linha3['NOME'] ?> </h4>
-            <p class="price_text">Preço : <span style="color:#262626;"> <?php echo $linha3['PRECO']; ?> </span></p>
-            <div class="tshirt_img"><img src="/images/sccp.png"></div>
-            <div class="btn_main">
-              <div class="seemore_bt"><a href="#">Comprar</a></div>
-            </div>
-          </div>
-        </div>
+<div class = "container-login" >
+    <a href="/admin/login.php" class="btn-login">Login</a>
+</div>
+
+  <section class="produtos-section">
+    <h2 class="titulo">Destaques</h2>
+    <div class="produtos-container">
+      <div class="produto">
+        <img src="/images/palmeiras.png" alt="Produto 1">
+        <h3> <?php echo $linha2['NOME'] ?> </h3>
+        <p class="preco"><span>Preço: R$</span> <?php echo $linha2['PRECO']; ?> </p>
+        <a href="#">Comprar</a>
       </div>
-    </div> 
-  </div> 
-   </body>
+
+      <div class="produto">
+        <img src="/images/spfc.png" alt="Produto 2">
+        <h3> <?php echo $linha1['NOME'] ?> </h3>
+        <p class="preco"><span>Preço: R$</span> <?php echo $linha1['PRECO']; ?></p>
+        <a href="#">Comprar</a>
+      </div>
+
+      <div class="produto">
+        <img src="/images/sccp.png" alt="Produto 3">
+        <h3> <?php echo $linha3['NOME'] ?> </h3>
+        <p class="preco"><span>Preço: R$</span> <?php echo $linha3['PRECO']; ?> </p>
+        <a href="#">Comprar</a>
+      </div>
+    </div>
+  </section>
+
+
+</body>
 </html>

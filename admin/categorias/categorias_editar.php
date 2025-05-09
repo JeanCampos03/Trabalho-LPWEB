@@ -25,11 +25,9 @@ $id = @$_GET["id"];
 
 //echo $ra;
 
-$sql = "SELECT p.*, c.nome nome_categoria 
-                    FROM produtos p
-                    JOIN categorias c
-                    ON p.categoria_id = c.id
-                    WHERE p.id = $id";
+$sql = "SELECT *
+        FROM categorias  
+        WHERE id = $id";
 
 $resultado = $con-> query($sql);
 
@@ -44,7 +42,7 @@ $dados = mysqli_fetch_assoc($resultado);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         
-    ALTERA PRODUTO <?php echo $dados["id"]; ?>
+    Alterar dados categoria <?php echo $dados["id"]; ?>
 
     </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -52,34 +50,21 @@ $dados = mysqli_fetch_assoc($resultado);
 
 </head>
 <body>
-    <form action="produtos_editar_salvar.php" method="post" >
+    <form action="categorias_editar_salvar.php" method="post">
         <div>
         <span> ID :</span>
-        <input type="text" name="id" readonly
+        <input type="text" name="id" 
         value="<?php echo $dados["id"]; ?>" 
         />
         </div>
 
 
         <div> <!--div é como se fosse um coringa é invisivel ao olho nu, mas conseguimos dar formato a ela.-->
-        <span> Nome do aluno :</span>
+        <span> Descrição da Categoria :</span>
         <input type="text" name="nome"
         value="<?php echo $dados["nome"]; ?>"
         />
         
-        </div>
-
-        <div>
-        <span> Preco :</span>
-        <input type="text" name="preco"        
-        value="<?php echo $dados["preco"]; ?>"
-        />
-
-        <div>
-        <span> ID Categoria :</span>
-        <input type="text" name="categoria_id"        
-        value="<?php echo $dados["categoria_id"]; ?>"
-        />
 
         </div>
         
@@ -88,7 +73,7 @@ $dados = mysqli_fetch_assoc($resultado);
         <input type="submit" value="Salvar"
             class="btn btn-primary"/>
 
-        <a href="/admin/produtos/index.php"
+        <a href="/admin/categorias/index.php"
             class="btn btn-secondary" >
             Voltar </a>
         </div>

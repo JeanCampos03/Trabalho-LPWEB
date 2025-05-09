@@ -3,7 +3,7 @@
 
 <head>
     <title>LOGIN ADM</title>
-    <link rel="icon" type="image/png" href="\images\bolatitle.png">
+    <link rel="icon" type="image/png" href="\images\title.png">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>

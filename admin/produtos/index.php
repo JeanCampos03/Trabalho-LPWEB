@@ -17,7 +17,7 @@ $logado = $_SESSION['usuario'];
 <head>
     <meta charset="UTF-8">
     <title>Consulta de Produtos</title>
-
+    <link rel="icon" type="image/png" href="/images/title.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
@@ -27,7 +27,7 @@ $logado = $_SESSION['usuario'];
 </head>
 
 <body>
-    <a href="cadastrar_produto.php" class="btn btn-success ">
+    <a href="produtos_cadastrar.php" class="btn btn-success ">
         CADASTRAR
     </a>
 

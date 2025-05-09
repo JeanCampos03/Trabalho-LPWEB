@@ -3,7 +3,7 @@
 <head>
 
     <title>SEM CADASTRO </title>
-    <link rel="icon" type="image/png" href="\images\bolatitle.png">
+    <link rel="icon" type="image/png" href="\images\title.png">
 
 </head>
 

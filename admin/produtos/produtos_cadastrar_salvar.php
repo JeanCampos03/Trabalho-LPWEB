@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<title>Fut Camisas</title>
-<link rel="icon" type="image/png" href="\images\bolatitle.png">
+<title> ERROR </title>
+<link rel="icon" type="image/png" href="\images\title.png">
+
 
 <?php
-include("../banco.php");
+include('../banco.php');
 
 $id_produto = $_POST['idproduto'];
 $descricao_produto = $_POST['descricao'];
@@ -12,7 +13,7 @@ $preco_produto = $_POST['preco'];
 $id_categoria = $_POST['idcategoria'];
 
 if ($id_produto == '' || $descricao_produto == '' || $preco_produto == '' || $id_categoria == '') {
-        echo "Erro - Id, descricao, preco ou categoria não pode ser nulo";
+        echo " <h1> Id, descricao, preco ou categoria não pode ser nulo </h1>";
         
         
 } else  {
@@ -26,5 +27,5 @@ if ($id_produto == '' || $descricao_produto == '' || $preco_produto == '' || $id
 
 ?>
 
-<a href="/admin/produtos/index.php" class="btn btn-primary"> Tentar Novamente </a>
+<a href="/admin/produtos/produtos_cadastrar.php" class="btn btn-primary"> Tentar Novamente </a>
 </html>
