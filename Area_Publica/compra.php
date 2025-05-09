@@ -71,8 +71,7 @@ $produto = $resultado->fetch_assoc();
   <img src="/images/<?php echo strtolower($produto['id']); ?>.png" alt="<?php echo $produto['nome']; ?>">
   <div class="produto-info">
     <h1><?php echo $produto['nome']; ?></h1>
-    <p><strong>Preço:</strong> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Produto 100% original, qualidade garantida.</p>
+    <p><strong>Preço:</strong> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>    
     <a href="/carrinho.php?add=<?php echo $produto['id']; ?>" class="botao-comprar">Adicionar ao Carrinho</a>
   </div>
 </div>

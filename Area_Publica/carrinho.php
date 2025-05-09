@@ -1,5 +1,5 @@
 <?php
-include('../admin/banco.php');  #pedro
+include('../admin/banco.php'); 
 
 if (isset($_GET['add']) && is_numeric($_GET['add'])) {
     $id = (int) $_GET['add'];

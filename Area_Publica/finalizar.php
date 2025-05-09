@@ -14,37 +14,27 @@ if (count($produtos) !== count($quantidades)) {
     exit;
 }
 
-$con->begin_transaction();
-
 $data = date('Y-m-d H:i:s');
-$stmt = $con->prepare("INSERT INTO vendas (data_venda) VALUES (?)");
-$stmt->bind_param("s", $data);
-
-if (!$stmt->execute()) {
-    $con->rollback();
+$sql_venda = "INSERT INTO vendas (data_venda) VALUES ('$data')";
+if (mysqli_query($con, $sql_venda)) {
+    $venda_id = mysqli_insert_id($con);
+} else {
     echo "Erro ao registrar a venda.";
     exit;
 }
 
-$venda_id = $stmt->insert_id;
-
-$stmt_item = $con->prepare("INSERT INTO vendasitens (venda_id, produto_id, quantidade) VALUES (?, ?, ?)");
-
 for ($i = 0; $i < count($produtos); $i++) {
-    $produto_id = intval($produtos[$i]);
-    $quantidade = intval($quantidades[$i]);
+    $produto_id = $produtos[$i];
+    $quantidade = $quantidades[$i];
 
     if ($quantidade > 0) {
-        $stmt_item->bind_param("iii", $venda_id, $produto_id, $quantidade);
-        if (!$stmt_item->execute()) {
-            $con->rollback();
+        $sql_item = "INSERT INTO vendasitens (venda_id, produto_id, quantidade) VALUES ($venda_id, $produto_id, $quantidade)";
+        if (!mysqli_query($con, $sql_item)) {
             echo "Erro ao registrar item da venda.";
             exit;
         }
     }
 }
-
-$con->commit();
 ?>
 
 <!DOCTYPE html>

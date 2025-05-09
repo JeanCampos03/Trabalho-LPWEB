@@ -41,31 +41,6 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
     .btn-login { text-decoration: none; padding: 8px 12px; background-color: #333; color: white; border-radius: 5px; }
     .titulo { text-align: center; margin-top: 20px; font-size: 24px; }
 
-    /* Carrossel simples */
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .carousel .produto {
-      flex: 0 0 auto;
-      width: 250px;
-      scroll-snap-align: start;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .carousel .produto img {
-      width: 100%;
-      height: auto;
-    }
-
     .produtos-grid {
       display: flex;
       flex-wrap: wrap;
@@ -99,7 +74,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
   <a href="/admin/login.php" class="btn-login">Login</a>
 </div>
 
-<h2 class="titulo">🔥 Destaques</h2>
+<h2 class="titulo">Destaques 🔥</h2>
 <div class="produtos-grid">
   <?php if (count($destaques) > 0): ?>
     <?php foreach ($destaques as $produto): ?>
@@ -116,7 +91,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
   <?php endif; ?>
 </div>
 
-<h2 class="titulo">🛒 Todos os Produtos</h2>
+<h2 class="titulo">Todos os Produtos 🛒</h2>
 <div class="produtos-grid">
   <?php if (count($produtos) > 0): ?>
     <?php foreach ($produtos as $produto): ?>
