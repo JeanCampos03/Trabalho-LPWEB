@@ -73,7 +73,7 @@ $produto = $resultado->fetch_assoc();
     <h1><?php echo $produto['nome']; ?></h1>
     <p><strong>Preço:</strong> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Produto 100% original, qualidade garantida.</p>
-    <a href="/carrinho.php?add=<?php echo $produto['id']; ?>" class="botao-comprar">Adicionar ao Carrinho</a>
+    <a href="/Area_Publica/carrinho.php?add=<?php echo $produto['id']; ?>" class="botao-comprar">Adicionar ao Carrinho</a>
   </div>
 </div>
 

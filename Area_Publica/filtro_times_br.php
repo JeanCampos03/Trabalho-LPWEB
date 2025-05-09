@@ -18,8 +18,12 @@ if ($resultado_destaques && $resultado_destaques->num_rows > 0) {
 }
 
 // Todos os produtos
-$sql_todos = "SELECT id, nome, preco FROM produtos";
-$resultado_todos = $con->query($sql_todos);
+$sql_brasileiros = "SELECT p.id, p.nome, p.preco
+                    FROM produtos p
+                    JOIN categorias c ON p.categoria_id = c.id
+                    WHERE c.id = 1";
+
+$resultado_todos = $con->query($sql_brasileiros);
 
 $produtos = [];
 if ($resultado_todos && $resultado_todos->num_rows > 0) {
@@ -36,61 +40,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
   <link rel="icon" type="image/png" href="/images/title.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .container-login { text-align: right; padding: 10px; }
-    .btn-login { text-decoration: none; padding: 8px 12px; background-color: #333; color: white; border-radius: 5px; }
-    .titulo { text-align: center; margin-top: 20px; font-size: 24px; }
 
-    /* Carrossel simples */
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .carousel .produto {
-      flex: 0 0 auto;
-      width: 250px;
-      scroll-snap-align: start;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .carousel .produto img {
-      width: 100%;
-      height: auto;
-    }
-
-    .produtos-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .produtos-grid .produto {
-      width: 200px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .produto img {
-      width: 100%;
-      height: auto;
-    }
-
-    .preco {
-      font-weight: bold;
-      color: green;
-    }
   </style>
 </head>
 <body>
@@ -100,9 +50,9 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
 </div>
 
 <div class="container-filtro"> 
-  <a href="teste.php" class ="filtro-todos">Todos</a>
-  <a href="teste.php" class ="filtro-todos">Times Brasileiros</a>
-  <a href="teste.php" class ="filtro-todos">Times Europeus</a>
+  <a href="filtro_todos.php" class ="filtro-todos">Todos</a>
+  <a href="filtro_times_br.php" class ="filtro-todos">Times Brasileiros</a>
+  <a href="filtro_times_europa.php" class ="filtro-todos">Times Europeus</a>
   <a href="index.php" class ="filtro-todos">Destaques</a>
 
 </div>
