@@ -1,7 +1,7 @@
 <?php
 include('../admin/banco.php');  
 
-<<<<<<< HEAD
+
 $consulta_produtos1 = "SELECT NOME,PRECO 
                        FROM PRODUTOS 
                        WHERE ID = 1";
@@ -24,7 +24,7 @@ foreach ($resultado3 as $linha3);
 
 $stmt = $con->query("SELECT id, nome FROM categorias");
 
-=======
+
 include('../admin/banco.php');
 
 // Destaques (os 3 mais vendidos)
@@ -53,7 +53,8 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
         $produtos[] = $linha;
     }
 }
->>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4
+
+
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +71,31 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
     <a href="/admin/login.php" class="btn-login">Login</a>
 </div>
 
-<<<<<<< HEAD
+<div class="container-filtro"> 
+  <a href="filtro_todos.php" class ="filtro-todos">Todos</a>
+  <a href="filtro_times_br.php" class ="filtro-todos">Times Brasileiros</a>
+  <a href="filtro_times_europa.php" class ="filtro-todos">Times Europeus</a>
+  <a href="index.php" class ="filtro-todos">Destaques</a>
+</div>
+
+<h2 class="titulo">🔥 Destaques</h2>
+<div class="produtos-grid">
+  <?php if (count($destaques) > 0): ?>
+    <?php foreach ($destaques as $produto): ?>
+      <div class="produto">
+        <img src="/images/<?php echo $produto['id']; ?>.png" alt="<?php echo $produto['nome']; ?>">
+        <h3><?php echo $produto['nome']; ?></h3>
+        <p class="preco">R$ <?php echo number_format($produto['preco'], 1, ',', '.'); ?></p>
+        <!---<a href="#">Comprar</a>-->
+        <a href="compra.php?id=<?php echo $produto['id']; ?>">Comprar</a>
+      </div>
+    <?php endforeach; ?>
+  <?php else: ?>
+    <p>Nenhum destaque disponível.</p>
+  <?php endif; ?>
+</div>
+
+
   <section class="produtos-section">
     <h2 class="titulo">Destaques</h2>
     <div class="produtos-container">
@@ -96,32 +121,10 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
       </div>
     </div>
   </section>
-=======
-<div class="container-filtro"> 
-  <a href="filtro_todos.php" class ="filtro-todos">Todos</a>
-  <a href="filtro_times_br.php" class ="filtro-todos">Times Brasileiros</a>
-  <a href="filtro_times_europa.php" class ="filtro-todos">Times Europeus</a>
-  <a href="index.php" class ="filtro-todos">Destaques</a>
-</div>
 
-<h2 class="titulo">🔥 Destaques</h2>
-<div class="produtos-grid">
-  <?php if (count($destaques) > 0): ?>
-    <?php foreach ($destaques as $produto): ?>
-      <div class="produto">
-        <img src="/images/<?php echo $produto['id']; ?>.png" alt="<?php echo $produto['nome']; ?>">
-        <h3><?php echo $produto['nome']; ?></h3>
-        <p class="preco">R$ <?php echo number_format($produto['preco'], 1, ',', '.'); ?></p>
-        <!---<a href="#">Comprar</a>-->
-        <a href="compra.php?id=<?php echo $produto['id']; ?>">Comprar</a>
-      </div>
-    <?php endforeach; ?>
-  <?php else: ?>
-    <p>Nenhum destaque disponível.</p>
-  <?php endif; ?>
-</div>
 
->>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4
+
+
 
 
 </body>

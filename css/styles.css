@@ -135,9 +135,6 @@ body {
   border-radius: 5px;                 /* Bordas arredondadas */
 }
 
-<<<<<<< HEAD
-
-=======
 .container-filtro {
   display: flex;             /* Torna o container flexível */
   justify-content: center; /* Alinha o conteúdo (botão) à direita */
@@ -227,4 +224,3 @@ body {
       text-align: center; 
       margin-top: 20px; font-size: 24px; 
     }
->>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4

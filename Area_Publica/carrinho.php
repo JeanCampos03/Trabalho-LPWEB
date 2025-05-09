@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 include('../admin/banco.php');  #pedro
 
 if (isset($_GET['add']) && is_numeric($_GET['add'])) {
@@ -31,7 +30,7 @@ if (isset($_POST['produto_id']) && isset($_POST['quantidade'])) {
             $linha['quantidade'] = (int) $qtds[$i];
             $produtos[] = $linha;
         }
-=======
+
 session_start();
 include('../admin/banco.php');
 
@@ -75,7 +74,6 @@ if (!empty($_SESSION['carrinho'])) {
     while ($linha = $result->fetch_assoc()) {
         $linha['quantidade'] = $_SESSION['carrinho'][$linha['id']];
         $produtos[] = $linha;
->>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4
     }
 }
 ?>
@@ -85,14 +83,13 @@ if (!empty($_SESSION['carrinho'])) {
   <meta charset="UTF-8">
   <title>Carrinho</title>
   <style>
-<<<<<<< HEAD
     body { font-family: Arial, sans-serif; padding: 20px; }
     table { border-collapse: collapse; width: 100%; max-width: 700px; margin-bottom: 30px; }
     th, td { border: 1px solid #ccc; padding: 12px; text-align: left; }
     th { background-color: #f0f0f0; }
     .total { font-size: 18px; font-weight: bold; text-align: right; }
     a.botao { padding: 8px 16px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; }
-=======
+
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
@@ -127,7 +124,6 @@ if (!empty($_SESSION['carrinho'])) {
       color: red;
       text-decoration: none;
     }
->>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4
   </style>
 </head>
 <body>
@@ -137,7 +133,6 @@ if (!empty($_SESSION['carrinho'])) {
 <?php if (empty($produtos)): ?>
   <p>O carrinho está vazio.</p>
 <?php else: ?>
-<<<<<<< HEAD
   <form action="finalizar.php" method="post">
     <table>
       <tr>
@@ -166,7 +161,7 @@ if (!empty($_SESSION['carrinho'])) {
     <p class="total">Total: R$ <?= number_format($total, 2, ',', '.') ?></p>
     <button type="submit" class="botao">Finalizar Compra</button>
   </form>
-=======
+
   <table>
     <tr>
       <th>Produto</th>
@@ -192,7 +187,6 @@ if (!empty($_SESSION['carrinho'])) {
   </table>
   <p class="total">Total: R$ <?= number_format($total, 2, ',', '.') ?></p>
   <a href="finalizar.php" class="botao">Finalizar Compra</a>
->>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4
 <?php endif; ?>
 
 </body>
