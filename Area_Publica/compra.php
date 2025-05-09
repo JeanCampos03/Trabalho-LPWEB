@@ -1,97 +1,81 @@
 <?php
+include('../admin/banco.php'); // conexão com o banco
 
-include("../admin/banco.php");
-session_start();
+// Verifica se o ID foi enviado
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    echo "Produto inválido.";
+    exit;
+}
 
-if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-  header('location:in/Area_Publica/index.php');
-  }
+$id = (int) $_GET['id'];
 
-$logado = $_SESSION['usuario'];
-/* 
-**   http://localhost/outros/aluno_alterar.php?ra=55555
-**   colocou link é GET, pois vai na URL;
-**   1- Receber via GET o RA do aluno.
-**   
-**   2- Buscar aluno no banco de dados.
-**
-**   3- Iremos mostrar os dados dele na tela dentro do form 
-**
-**   4- Enviar os dados alterados para o servidor salvar
-*/
+// Consulta o produto
+$sql = "SELECT * FROM produtos WHERE id = $id";
+$resultado = $con->query($sql);
 
-$id = @$_GET["id"];
+if (!$resultado || $resultado->num_rows == 0) {
+    echo "Produto não encontrado.";
+    exit;
+}
 
-//echo $ra;
-
-$sql = "SELECT p.*, c.nome nome_categoria 
-                    FROM produtos p
-                    JOIN categorias c
-                    ON p.categoria_id = c.id
-                    WHERE p.id = $id";
-
-$resultado = $con-> query($sql);
-
-$dados = mysqli_fetch_assoc($resultado);
-
+$produto = $resultado->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        
-    ALTERA PRODUTO <?php echo $dados["id"]; ?>
-
-    </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"crossorigin="anonymous"></script>
-
+  <meta charset="UTF-8">
+  <title><?php echo $produto['nome']; ?> - FUT CAMISAS</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .produto-detalhe {
+      display: flex;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+    .produto-detalhe img {
+      max-width: 300px;
+      border-radius: 10px;
+    }
+    .produto-info {
+      margin-left: 30px;
+    }
+    .produto-info h1 {
+      margin-bottom: 10px;
+    }
+    .produto-info p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .botao-comprar {
+      padding: 10px 20px;
+      background-color: #0a74da;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .botao-comprar:hover {
+      background-color: #094ab2;
+    }
+  </style>
 </head>
 <body>
-    <form action="produtos_editar_salvar.php" method="post" >
-        <div>
-        <span> ID :</span>
-        <input type="text" name="id" readonly
-        value="<?php echo $dados["id"]; ?>" 
-        />
-        </div>
 
+<div class="produto-detalhe">
+  <img src="/images/<?php echo strtolower($produto['id']); ?>.png" alt="<?php echo $produto['nome']; ?>">
+  <div class="produto-info">
+    <h1><?php echo $produto['nome']; ?></h1>
+    <p><strong>Preço:</strong> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Produto 100% original, qualidade garantida.</p>
+    <a href="/carrinho.php?add=<?php echo $produto['id']; ?>" class="botao-comprar">Adicionar ao Carrinho</a>
+  </div>
+</div>
 
-        <div> <!--div é como se fosse um coringa é invisivel ao olho nu, mas conseguimos dar formato a ela.-->
-        <span> Nome do aluno :</span>
-        <input type="text" name="nome"
-        value="<?php echo $dados["nome"]; ?>"
-        />
-        
-        </div>
-
-        <div>
-        <span> Preco :</span>
-        <input type="text" name="preco"        
-        value="<?php echo $dados["preco"]; ?>"
-        />
-
-        <div>
-        <span> ID Categoria :</span>
-        <input type="text" name="categoria_id"        
-        value="<?php echo $dados["categoria_id"]; ?>"
-        />
-
-        </div>
-        
-        <div>
-            
-        <input type="submit" value="Salvar"
-            class="btn btn-primary"/>
-
-        <a href="/admin/produtos/index.php"
-            class="btn btn-secondary" >
-            Voltar </a>
-        </div>
-    </form>
 </body>
 </html>
