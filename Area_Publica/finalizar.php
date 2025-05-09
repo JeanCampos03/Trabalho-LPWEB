@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 include('../admin/banco.php');
 
 if (!isset($_POST['produto_id']) || !isset($_POST['quantidade'])) {
@@ -59,3 +60,11 @@ $con->commit();
     <a href="produtos.php">Voltar à loja</a>
 </body>
 </html>
+=======
+// temporario
+echo "<link rel='stylesheet' href='/css/styles.css'>";
+echo "<h1 class='titulo'> OBRIGADO PELA COMPRA! </h1>";
+echo "<a href='index.php' class='container-filtro' >Inicio</a>";
+
+?>
+>>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4

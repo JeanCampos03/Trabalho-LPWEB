@@ -135,4 +135,96 @@ body {
   border-radius: 5px;                 /* Bordas arredondadas */
 }
 
+<<<<<<< HEAD
 
+=======
+.container-filtro {
+  display: flex;             /* Torna o container flexível */
+  justify-content: center; /* Alinha o conteúdo (botão) à direita */
+  padding: 10px;
+  gap: 10px
+}
+
+.filtro-todos {
+  color: white;                        /* Cor do texto do botão */
+  background-color: rgb(109, 133, 121); /* Cor de fundo verde */
+  padding: 10px 20px;                 /* Espaço interno do botão */
+  text-decoration: none;              /* Remove sublinhado do link */
+  border-radius: 5px;                 /* Bordas arredondadas */
+}
+
+/* Carrossel simples */
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .carousel .produto {
+      flex: 0 0 auto;
+      width: 250px;
+      scroll-snap-align: start;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .carousel .produto img {
+      width: 100%;
+      height: auto;
+    }
+
+    .produtos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .produtos-grid .produto {
+      width: 200px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .produto img {
+      width: 100%;
+      height: auto;
+    }
+
+    .preco {
+      font-weight: bold;
+      color: green;
+    }
+
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    .container-login { 
+      text-align: right; 
+      padding: 10px; 
+    }
+
+    .btn-login { 
+      text-decoration: none; 
+      padding: 8px 12px; 
+      background-color: #333; 
+      color: white; 
+      border-radius: 5px;
+     }
+
+    .titulo { 
+      text-align: center; 
+      margin-top: 20px; font-size: 24px; 
+    }
+>>>>>>> 83d0e93b353c2b87b40fbebc9afcdbb2815e63b4
