@@ -1,9 +1,8 @@
 <?php
-include('../admin/banco.php');  #pedro
-
+include('../admin/banco.php');  
 if (isset($_GET['add']) && is_numeric($_GET['add'])) {
     $id = (int) $_GET['add'];
-    $qtd = 1;
+    //$qtd = 1;
 
     
     echo '<form id="autoform" method="post" action="carrinho.php">';
@@ -18,11 +17,12 @@ $produtos = [];
 if (isset($_POST['produto_id']) && isset($_POST['quantidade'])) {
     $ids = $_POST['produto_id'];
     $qtds = $_POST['quantidade'];
-    
+     
     $valid_ids = array_filter($ids, 'is_numeric');
     if (!empty($valid_ids)) {
         $idlist = implode(",", $valid_ids);
-        $query = "SELECT * FROM produtos WHERE id IN ($idlist)";
+        var_dump($idlist);
+        $query = "SELECT * FROM produtos WHERE id IN $idlist";
         $result = $con->query($query);
 
         while ($linha = $result->fetch_assoc()) {
@@ -30,6 +30,8 @@ if (isset($_POST['produto_id']) && isset($_POST['quantidade'])) {
             $linha['quantidade'] = (int) $qtds[$i];
             $produtos[] = $linha;
         }
+      }
+    }
 
 session_start();
 include('../admin/banco.php');

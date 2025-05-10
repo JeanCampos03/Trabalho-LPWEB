@@ -1,30 +1,4 @@
 <?php
-include('../admin/banco.php');  
-
-
-$consulta_produtos1 = "SELECT NOME,PRECO 
-                       FROM PRODUTOS 
-                       WHERE ID = 1";
-
-$consulta_produtos2 = "SELECT NOME,PRECO 
-                       FROM PRODUTOS 
-                       WHERE ID = 2";
-
-$consulta_produtos3 = "SELECT NOME,PRECO 
-                       FROM PRODUTOS 
-                       WHERE ID = 3";
-
-$resultado1 = $con-> query($consulta_produtos1);
-$resultado2 = $con-> query($consulta_produtos2);
-$resultado3 = $con-> query($consulta_produtos3);
-
-foreach ($resultado1 as $linha1);
-foreach ($resultado2 as $linha2);
-foreach ($resultado3 as $linha3);
-
-$stmt = $con->query("SELECT id, nome FROM categorias");
-
-
 include('../admin/banco.php');
 
 // Destaques (os 3 mais vendidos)
@@ -34,6 +8,7 @@ $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasi
                   GROUP BY produtos.id, produtos.nome, produtos.preco
                   ORDER BY qtde DESC
                   LIMIT 3";
+                  
 $resultado_destaques = $con->query($sql_destaques);
 
 $destaques = [];
@@ -94,38 +69,6 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
     <p>Nenhum destaque disponível.</p>
   <?php endif; ?>
 </div>
-
-
-  <section class="produtos-section">
-    <h2 class="titulo">Destaques</h2>
-    <div class="produtos-container">
-      <div class="produto">
-        <img src="/images/palmeiras.png" alt="Produto 1">
-        <h3> <?php echo $linha2['NOME'] ?> </h3>
-        <p class="preco"><span>Preço: R$</span> <?php echo $linha2['PRECO']; ?> </p>
-        <a href="#">Comprar</a>
-      </div>
-
-      <div class="produto">
-        <img src="/images/spfc.png" alt="Produto 2">
-        <h3> <?php echo $linha1['NOME'] ?> </h3>
-        <p class="preco"><span>Preço: R$</span> <?php echo $linha1['PRECO']; ?></p>
-        <a href="#">Comprar</a>
-      </div>
-
-      <div class="produto">
-        <img src="/images/sccp.png" alt="Produto 3">
-        <h3> <?php echo $linha3['NOME'] ?> </h3>
-        <p class="preco"><span>Preço: R$</span> <?php echo $linha3['PRECO']; ?> </p>
-        <a href="#">Comprar</a>
-      </div>
-    </div>
-  </section>
-
-
-
-
-
 
 </body>
 </html>

@@ -57,7 +57,6 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
 
 </div>
 
-<h2 class="titulo">🔥 Destaques</h2>
 <div class="produtos-grid">
   <?php if (count($destaques) > 0): ?>
     <?php foreach ($destaques as $produto): ?>
@@ -69,12 +68,11 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
         <a href="compra.php?id=<?php echo $produto['id']; ?>">Comprar</a>
       </div>
     <?php endforeach; ?>
-  <?php else: ?>
-    <p>Nenhum destaque disponível.</p>
   <?php endif; ?>
 </div>
 
-<h2 class="titulo">🛒 Todos os Produtos</h2>
+
+<h2 class="titulo"> 🌍 Times da Europa </h2>
 <div class="produtos-grid">
   <?php if (count($produtos) > 0): ?>
     <?php foreach ($produtos as $produto): ?>
