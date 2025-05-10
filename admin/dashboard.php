@@ -16,13 +16,12 @@ include('../admin/banco.php');
 $logado = $_SESSION['usuario'];
 
 
-// Destaques (os 3 mais vendidos)
+// Destaques (os mais vendidos)
 $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasitens.quantidade) AS qtde
                   FROM vendasitens
                   INNER JOIN produtos ON produtos.id = vendasitens.produto_id
                   GROUP BY produtos.id, produtos.nome, produtos.preco
-                  ORDER BY qtde DESC
-                  LIMIT 10";
+                  ORDER BY qtde DESC";
                   
 $resultado_destaques = $con->query($sql_destaques);
 
@@ -44,7 +43,23 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
     }
 }
 
+$sql_conta_vendas = "SELECT vi.produto_id AS produto_id, count(vi.produto_id) AS numero_vendas_itens 
+                     FROM vendasitens vi
+                     JOIN vendas v ON v.id = vi.venda_id
+                     GROUP BY vi.produto_id
+                     ORDER BY numero_vendas_itens DESC";
+
+$resultado_vendas = $con->query($sql_conta_vendas);
+
+$vendas = [];
+if ($resultado_vendas && $resultado_vendas->num_rows > 0) {
+    foreach ($resultado_vendas as $linha) {
+        $vendas[] = $linha;
+    }
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -80,17 +95,27 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
     <h2 class="titulo">TOP 10 MAIS VENDIDOS</h2>
     <div class="produtos-grid">
   <?php if (count($destaques) > 0): ?>
-    <?php foreach ($destaques as $produto): ?>
+    <?php foreach ($destaques as $produto): 
+      $conta_vendas = 0; ?>
+      
+      <?php foreach ($vendas as $vendas_prod) {
+      if ($vendas_prod['produto_id'] == $produto['id']) {
+        $conta_vendas = $vendas_prod['numero_vendas_itens'];
+        break;
+      }} ?>
+
       <div class="produto">
         <img src="/images/<?php echo $produto['id']; ?>.png" alt="<?php echo $produto['nome']; ?>">
-        <h3><?php echo $produto['nome']; ?></h3>
+        <h3><?php echo $produto['nome']; ?></h3>        
         <p class="preco">R$ <?php echo number_format($produto['preco'], 1, ',', '.'); ?></p>
-        <!---<a href="#">Comprar</a>-->
-        <a href="compra.php?id=<?php echo $produto['id']; ?>">Comprar</a>
+        <p class="preco">Id produto : <?php echo $produto['id']; ?></p>
+        <p class="preco">Vendidos : <?php echo $conta_vendas?></p>
+
       </div>
+
     <?php endforeach; ?>
   <?php else: ?>
-    <p>Nenhum destaque disponível.</p>
+    <p>Nenhuma venda ainda</p>
   <?php endif; ?>
 </div>
 

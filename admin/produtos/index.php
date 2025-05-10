@@ -72,7 +72,8 @@ $logado = $_SESSION['usuario'];
             $sql = "SELECT p.*, c.nome nome_categoria 
                     FROM produtos p
                     JOIN categorias c
-                    ON p.categoria_id = c.id";
+                    ON p.categoria_id = c.id
+                    ORDER BY p.id";
 
             $retorno = $con->query($sql);
 

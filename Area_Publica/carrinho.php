@@ -74,8 +74,6 @@ if (isset($_POST['produto_id']) && isset($_POST['quantidade'])) {
     </table>
     <p class="total">Total: R$ <?= number_format($total, 2, ',', '.') ?></p>
     <button type="submit" class="botao">Finalizar Compra</button>
-    <a href="/Area_Publica/index.php" class="botao">Continuar comprando</a>
-
   </form>
 <?php endif; ?>
 
