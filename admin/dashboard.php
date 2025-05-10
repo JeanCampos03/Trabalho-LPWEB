@@ -58,6 +58,27 @@ if ($resultado_vendas && $resultado_vendas->num_rows > 0) {
     }
 }
 
+$total_vendas_valor = "SELECT sum(p.preco) total_vendas 
+                 FROM produtos p
+                 JOIN vendasitens vi 
+                 on vi.produto_id = p.id";
+$resultado_total_valor = $con->query($total_vendas_valor);
+
+$total = [];
+foreach ($resultado_total_valor as $linha) {
+    $total = $linha;
+}
+
+$total_vendas_itens = "SELECT sum(id) total_itens FROM vendasitens";
+
+$resultado_total_itens = $con->query($total_vendas_itens);
+
+$itens = [];
+foreach ($resultado_total_itens as $linha) {
+  $itens = $linha;
+}
+
+
 ?>
 
 
@@ -79,13 +100,23 @@ if ($resultado_vendas && $resultado_vendas->num_rows > 0) {
 </div>
 
 
-  <header class="topo">
-    <h1>DASHBOARD</h1>
+  <header class="topo-dashboard">
+  <h1>DASHBOARD</h1>
+  <ul class="menu-detalhes">
+  <li> Quantidade vendas : <?php echo $itens['total_itens']; ?></li>
+  </ul>
+
+  <ul class="menu-detalhes">
+  <li>Vendas totais : R$<?php echo number_format($total['total_vendas'], 2, ',', '.');?></li>
+    </ul>
+      
+  </header>
+
+    <header class="topo">
     <nav>
       <ul class="menu">
             <li><a href="categorias\index.php">Categorias</a></li>
             <li><a href="produtos\index.php">Produtos</a></li>
-            <li><a href="vendas\index.php">Vendas</a></li>
       </ul>
     </nav>
     
