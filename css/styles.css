@@ -333,3 +333,50 @@ body {
       text-decoration: none; 
       border-radius: 4px; 
     }
+
+
+.container-login-admin {
+  display: flex;             /* Ativa o modelo Flexbox para o container */
+  justify-content: center;   /* Centraliza o conteúdo na horizontal */
+  align-items: center;       /* Centraliza o conteúdo na vertical */
+  height: 100vh;             /* Altura igual à altura total da janela (viewport) */
+  background-color: #f0f0f0; /* Define uma cor de fundo clara */
+}
+
+
+.form-login-admin {
+  background-color: white;               /* Fundo branco para o formulário */
+  padding: 40px;                         /* Espaço interno em todos os lados */
+  border-radius: 10px;                   /* Bordas arredondadas */
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);   /* Sombra leve ao redor do formulário */
+  text-align: center;                    /* Centraliza texto e elementos internos */
+  width: 300px;                          /* Largura fixa do formulário */
+}
+
+
+.form-login-admin input[type="text"],
+.form-login-admin input[type="password"] {
+  width: 100%;           /* Faz o input ocupar 100% da largura do form */
+  padding: 10px;         /* Espaçamento interno dentro dos campos */
+  margin: 10px 0;        /* Espaço acima e abaixo dos campos */
+}
+
+
+.input-login-admin {
+ display: inline-block;          /* Permite definir padding e margin */
+  margin: 10px 5px 0 5px;         /* Espaço ao redor do botão/link */
+  padding: 10px 20px;             /* Espaçamento interno do botão */
+  background-color: #2c3e50;      /* Cor de fundo escura */
+  color: white;                   /* Cor do texto branca */
+  text-decoration: none;          /* Remove sublinhado (em caso de link) */
+  border: none;                   /* Remove borda (caso seja botão) */
+  border-radius: 5px;             /* Bordas arredondadas */
+  cursor: pointer;                /* Cursor em forma de mão ao passar o mouse */
+  box-sizing: border-box;
+}
+
+.input-login-admin:hover {
+  background-color: #1a252f;      /* Cor de fundo mais escura ao passar o mouse */
+}
+
+

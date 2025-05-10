@@ -1,36 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-    <title>SEM CADASTRO </title>
-    <link rel="icon" type="image/png" href="\images\title.png">
-
+    <title>ERROR</title>
+    <link rel="icon" type="image/png" href="/images/title.png">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
-    <form action="login_novo_salvar.php" method="post">
-        <h1>ERRO-LOGIN NAO ENCONTRADO </h1>
-        <legend>CRIE UM LOGIN</legend><br />
-        <div>
-            <span> USUÁRIO : </span>
-            <input type="text" name="usuario" />
-        </div>
 
-        <br>
-
-        <div> <!--div é como se fosse um coringa é invisivel ao olho nu, mas conseguimos dar formato a ela.-->
-            <span> SENHA : </span>
-            <input type="password" name="senha" />
-        </div>
-
-
-        <div>
-
-            <a href="login.php" class="btn btn-danger"> Tentar Novamente </a>
-
-            <input type="submit" value="Criar" class="btn btn-primary" />
-        </div>
+<div class="container-login-admin">
+    <form class="form-login-admin" action="login_novo_salvar.php" method="post">
+        <legend>CRIE O ACESSO ÚNICO</legend><br />
+        
+        <span> USUÁRIO : </span>
+        <input type="text" name="usuario" /><br>        
+        
+        <span> SENHA : </span>
+        <input type="password" name="senha" /><br><br>
+        <input type="submit" value="Criar" class="input-login-admin" />
     </form>
-</body>
-
-</html>
+</div>
