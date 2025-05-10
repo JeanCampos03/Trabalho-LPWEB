@@ -7,7 +7,7 @@ $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasi
                   INNER JOIN produtos ON produtos.id = vendasitens.produto_id
                   GROUP BY produtos.id, produtos.nome, produtos.preco
                   ORDER BY qtde DESC
-                  LIMIT 3";
+                  LIMIT 5";
                   
 $resultado_destaques = $con->query($sql_destaques);
 
@@ -53,7 +53,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
   <a href="index.php" class ="filtro-todos">Destaques</a>
 </div>
 
-<h2 class="titulo">🔥 Destaques</h2>
+<h2 class="titulo"> Destaques 🔥</h2>
 <div class="produtos-grid">
   <?php if (count($destaques) > 0): ?>
     <?php foreach ($destaques as $produto): ?>

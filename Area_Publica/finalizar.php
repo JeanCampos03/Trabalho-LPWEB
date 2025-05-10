@@ -23,18 +23,12 @@ if (mysqli_query($con, $sql_venda)) {
     exit;
 }
 
-$venda_id = $stmt->insert_id;
-
-$stmt_item = $con->prepare("INSERT INTO vendasitens (venda_id, produto_id, quantidade) VALUES (?, ?, ?)");
-
 for ($i = 0; $i < count($produtos); $i++) {
-
     $produto_id = $produtos[$i];
     $quantidade = $quantidades[$i];
 
     if ($quantidade > 0) {
-         $sql_item = "INSERT INTO vendasitens (venda_id, produto_id, quantidade) 
-                      VALUES ($venda_id, $produto_id, $quantidade)";
+        $sql_item = "INSERT INTO vendasitens (venda_id, produto_id, quantidade) VALUES ($venda_id, $produto_id, $quantidade)";
         if (!mysqli_query($con, $sql_item)) {
             echo "Erro ao registrar item da venda.";
             exit;
@@ -42,7 +36,10 @@ for ($i = 0; $i < count($produtos); $i++) {
     }
 }
 
-$con->commit();
+$contagem_vendas= "SELECT count(id) c from vendas";
+    $result = $con->query($contagem_vendas);
+    $n_vendas = $result->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
@@ -53,14 +50,7 @@ $con->commit();
 </head>
 <body>
     <h2>Compra finalizada com sucesso!</h2>
-    <p>Número da venda: <?= $venda_id ?></p>
-    <a href="produtos.php">Voltar à loja</a>
+    <p>Número da venda: <?php echo $n_vendas['c']; ?></p>
+    <a href="index.php">Voltar à loja</a>
 </body>
 </html>
-
-// temporario
-echo "<link rel='stylesheet' href='/css/styles.css'>";
-echo "<h1 class='titulo'> OBRIGADO PELA COMPRA! </h1>";
-echo "<a href='index.php' class='container-filtro' >Inicio</a>";
-
-?>

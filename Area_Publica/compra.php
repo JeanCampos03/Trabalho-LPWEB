@@ -27,9 +27,6 @@ $produto = $resultado->fetch_assoc();
   <meta charset="UTF-8">
   <title><?php echo $produto['nome']; ?> - FUT CAMISAS</title>
   <link rel="stylesheet" href="/css/styles.css">
-  <style>
-
-  </style>
 </head>
 <body>
 
@@ -37,9 +34,9 @@ $produto = $resultado->fetch_assoc();
   <img src="/images/<?php echo strtolower($produto['id']); ?>.png" alt="<?php echo $produto['nome']; ?>">
   <div class="produto-info">
     <h1><?php echo $produto['nome']; ?></h1>
-    <p><strong>Preço:</strong> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
+    <p><strong>Preço:</strong> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>    
     <a href="/Area_Publica/carrinho.php?add=<?php echo $produto['id']; ?>" class="botao-comprar">Adicionar ao Carrinho</a>
-
+    
   </div>
 </div>
 
