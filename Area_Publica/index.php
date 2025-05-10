@@ -7,7 +7,7 @@ $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasi
                   INNER JOIN produtos ON produtos.id = vendasitens.produto_id
                   GROUP BY produtos.id, produtos.nome, produtos.preco
                   ORDER BY qtde DESC
-                  LIMIT 5";
+                  LIMIT 3";
                   
 $resultado_destaques = $con->query($sql_destaques);
 
