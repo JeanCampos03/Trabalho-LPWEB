@@ -69,7 +69,7 @@ foreach ($resultado_total_valor as $linha) {
     $total = $linha;
 }
 
-$total_vendas_itens = "SELECT sum(id) total_itens FROM vendasitens";
+$total_vendas_itens = "SELECT count(id) total_itens FROM vendasitens";
 
 $resultado_total_itens = $con->query($total_vendas_itens);
 
@@ -102,16 +102,35 @@ foreach ($resultado_total_itens as $linha) {
 
   <header class="topo-dashboard">
   <h1>DASHBOARD</h1>
-  <ul class="menu-detalhes">
-  <li> Quantidade vendas : <?php echo $itens['total_itens']; ?></li>
-  </ul>
 
-  <ul class="menu-detalhes">
-  <li>Vendas totais : R$<?php echo number_format($total['total_vendas'], 2, ',', '.');?></li>
-    </ul>
+  <div class="container-retangulo">
+    <div class="retangulo">
+      <ul class="menu-detalhes">
+      <li> ITENS VENDIDOS : <?php echo $itens['total_itens']; ?></li>
+        </ul>
+    </div>
+
+    <div class="retangulo">
+        <ul class="menu-detalhes">
+      <li> VALOR TOTAL : R$<?php echo number_format($total['total_vendas'], 2, ',', '.');?></li>
+        </ul>
+    </div>
+
+        <div class="retangulo">
+        <ul class="menu-detalhes">
+      <li> ITEM MAIS VENDIDO : </li>
+        </ul>
+    </div>
+
+        <div class="retangulo">
+        <ul class="menu-detalhes">
+      <li> ITEM MENOS VENDIDO : </li>
+        </ul>
+    </div>
+
+  </div>
       
   </header>
-
     <header class="topo">
     <nav>
       <ul class="menu">

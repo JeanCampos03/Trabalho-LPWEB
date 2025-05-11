@@ -50,7 +50,7 @@ $contagem_vendas= "SELECT count(id) c from vendas";
 </head>
 <body>
     <h2>Compra finalizada com sucesso!</h2>
-    <p>Número da venda: <?php echo $n_vendas['c']; ?></p>
+    <p>Número Pedido: #<?php echo $n_vendas['c']; ?></p>
     <a href="index.php">Voltar à loja</a>
 </body>
 </html>
