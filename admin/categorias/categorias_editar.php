@@ -1,82 +1,57 @@
 <?php
-
 include("../banco.php");
 session_start();
 
-if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-  header('location:in/Area_Publica/index.php');
-  }
+if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true)) {
+  header('location:/Area_Publica/index.php');
+}
 
 $logado = $_SESSION['usuario'];
-/* 
-**   http://localhost/outros/aluno_alterar.php?ra=55555
-**   colocou link é GET, pois vai na URL;
-**   1- Receber via GET o RA do aluno.
-**   
-**   2- Buscar aluno no banco de dados.
-**
-**   3- Iremos mostrar os dados dele na tela dentro do form 
-**
-**   4- Enviar os dados alterados para o servidor salvar
-*/
-
 $id = @$_GET["id"];
 
-//echo $ra;
-
-$sql = "SELECT *
-        FROM categorias  
-        WHERE id = $id";
-
-$resultado = $con-> query($sql);
-
+$sql = "SELECT * FROM categorias WHERE id = $id";
+$resultado = $con->query($sql);
 $dados = mysqli_fetch_assoc($resultado);
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        
-    Alterar dados categoria <?php echo $dados["id"]; ?>
-
-    </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"crossorigin="anonymous"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alterar Categoria <?= $dados["id"] ?></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 40px;
+    }
+    .container-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
+  <div class="container-form">
+    <h2 class="text-center">Editar Categoria</h2>
     <form action="categorias_editar_salvar.php" method="post">
-        <div>
-        <span> ID :</span>
-        <input type="text" name="id" 
-        value="<?php echo $dados["id"]; ?>" 
-        />
-        </div>
-
-
-        <div> <!--div é como se fosse um coringa é invisivel ao olho nu, mas conseguimos dar formato a ela.-->
-        <span> Descrição da Categoria :</span>
-        <input type="text" name="nome"
-        value="<?php echo $dados["nome"]; ?>"
-        />
-        
-
-        </div>
-        
-        <div>
-            
-        <input type="submit" value="Salvar"
-            class="btn btn-primary"/>
-
-        <a href="/admin/categorias/index.php"
-            class="btn btn-secondary" >
-            Voltar </a>
-        </div>
+      <div class="form-group">
+        <label>ID:</label>
+        <input type="text" name="id" class="form-control" readonly value="<?= $dados["id"] ?>">
+      </div>
+      <div class="form-group">
+        <label>Nome da Categoria:</label>
+        <input type="text" name="nome" class="form-control" value="<?= $dados["nome"] ?>">
+      </div>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="/admin/categorias/index.php" class="btn btn-secondary">Voltar</a>
+      </div>
     </form>
+  </div>
 </body>
 </html>

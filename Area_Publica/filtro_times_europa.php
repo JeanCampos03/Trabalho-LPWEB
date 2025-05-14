@@ -33,7 +33,6 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
   <a href="/admin/login.php" class="btn-login">Login</a>
 </div>
 
-<h2 class="titulo">  Times da Europa 🌍</h2>
 <div class="container-filtro"> 
   <a href="filtro_todos.php" class ="filtro-todos">Todos</a>
   <a href="filtro_times_br.php" class ="filtro-todos">Times Brasileiros</a>
@@ -42,6 +41,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
 
 </div>
 
+<h2 class="titulo">  Times da Europa 🌍</h2>
 <div class="produtos-grid">
   <?php if (count($produtos) > 0): ?>
     <?php foreach ($produtos as $produto): ?>

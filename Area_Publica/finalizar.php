@@ -9,7 +9,7 @@ if (!isset($_POST['produto_id']) || !isset($_POST['quantidade'])) {
 $produtos = $_POST['produto_id'];
 $quantidades = $_POST['quantidade'];
 
-if (count($produtos) != count($quantidades)) {
+if (count($produtos) !== count($quantidades)) {
     echo "Erro nos dados enviados.";
     exit;
 }
@@ -36,7 +36,7 @@ for ($i = 0; $i < count($produtos); $i++) {
     }
 }
 
-$contagem_vendas= "SELECT count(id) from vendas";
+$contagem_vendas= "SELECT count(id) c from vendas";
     $result = $con->query($contagem_vendas);
     $n_vendas = $result->fetch_assoc();
 
@@ -50,7 +50,7 @@ $contagem_vendas= "SELECT count(id) from vendas";
 </head>
 <body>
     <h2>Compra finalizada com sucesso!</h2>
-    <p>Número Pedido: #<?php echo $n_vendas['count(id)']; ?></p>
+    <p>Número Pedido: #<?php echo $n_vendas['c']; ?></p>
     <a href="index.php">Voltar à loja</a>
 </body>
 </html>
