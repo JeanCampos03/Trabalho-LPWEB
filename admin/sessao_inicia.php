@@ -20,5 +20,7 @@ if (mysqli_num_rows($resultado) > 0) {
     $_SESSION['usuario'] = $usuario;
     $_SESSION['senha'] = $senha;
     header('location:dashboard.php');
+} else {
+    header('location:/Area_Publica/index.php');
 }
 ?>
