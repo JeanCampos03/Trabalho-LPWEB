@@ -7,17 +7,27 @@ if(!isset ($_SESSION['usuario']) && !isset ($_SESSION['senha'])) {
 include('../admin/banco.php');
 $logado = $_SESSION['usuario'];
 
+//
 $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasitens.quantidade) AS qtde
                   FROM vendasitens
                   INNER JOIN produtos ON produtos.id = vendasitens.produto_id
                   GROUP BY produtos.id, produtos.nome, produtos.preco
-                  ORDER BY qtde DESC";
+                  ORDER BY qtde DESC 
+                  LIMIT 10";
 $resultado_destaques = $con->query($sql_destaques);
 
 $destaques = [];
 if ($resultado_destaques && $resultado_destaques->num_rows > 0) {
     foreach ($resultado_destaques as $linha) {
         $destaques[] = $linha;
+        
+    }
+}
+
+$top1 = [];
+if ($resultado_destaques && $resultado_destaques->num_rows > 0) {
+    foreach ($resultado_destaques as $linha) {
+        $top1 = $linha;
     }
 }
 
@@ -90,7 +100,7 @@ foreach ($resultado_total_itens as $linha) {
       <div class="card text-white bg-primary h-100">
         <div class="card-body">
           <h5 class="card-title">Itens Vendidos</h5>
-          <p class="card-text fs-4"><?= $itens['total_itens'] ?></p>
+          <p class="card-text fs-4"><?= $itens['total_itens'];?></p>
         </div>
       </div>
     </div>
@@ -99,7 +109,7 @@ foreach ($resultado_total_itens as $linha) {
       <div class="card text-white bg-success h-100">
         <div class="card-body">
           <h5 class="card-title">Valor Total</h5>
-          <p class="card-text fs-4">R$ <?= number_format($total['total_vendas'], 2, ',', '.') ?></p>
+          <p class="card-text fs-4">R$ <?= number_format($total['total_vendas'], 2, ',', '.'); ?></p>
         </div>
       </div>
     </div>
@@ -108,7 +118,7 @@ foreach ($resultado_total_itens as $linha) {
       <div class="card bg-warning text-dark h-100">
         <div class="card-body">
           <h5 class="card-title">Item Mais Vendido</h5>
-          <p class="card-text">Em breve...</p>
+          <p class="card-text"> </p>
         </div>
       </div>
     </div>
@@ -117,7 +127,7 @@ foreach ($resultado_total_itens as $linha) {
       <div class="card bg-danger text-white h-100">
         <div class="card-body">
           <h5 class="card-title">Item Menos Vendido</h5>
-          <p class="card-text">Em breve...</p>
+          <p class="card-text"><?php echo $top1['nome'] ?></p>
         </div>
       </div>
     </div>
@@ -150,7 +160,7 @@ foreach ($resultado_total_itens as $linha) {
             <img src="/images/<?= $produto['id'] ?>.png" class="card-img-top" alt="<?= $produto['nome'] ?>">
             <div class="card-body">
               <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="card-text">Preço: R$ <?= number_format($produto['preco'], 1, ',', '.') ?></p>
+              <p class="card-text">Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
               <p class="card-text">ID: <?= $produto['id'] ?></p>
               <p class="card-text">Vendidos: <?= $conta_vendas ?></p>
             </div>
