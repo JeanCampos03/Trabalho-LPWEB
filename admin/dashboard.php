@@ -24,12 +24,16 @@ if ($resultado_destaques && $resultado_destaques->num_rows > 0) {
     }
 }
 
-$top1 = [];
+$top = [];
 if ($resultado_destaques && $resultado_destaques->num_rows > 0) {
     foreach ($resultado_destaques as $linha) {
-        $top1 = $linha;
+        $top[] = $linha;
     }
 }
+
+$primeiro = $top[0];
+$ultimo = $top[count($top) - 1];
+
 
 $sql_todos = "SELECT id, nome, preco FROM produtos";
 $resultado_todos = $con->query($sql_todos);
@@ -118,7 +122,7 @@ foreach ($resultado_total_itens as $linha) {
       <div class="card bg-warning text-dark h-100">
         <div class="card-body">
           <h5 class="card-title">Item Mais Vendido</h5>
-          <p class="card-text"> </p>
+          <p class="card-text"> <?php  echo $primeiro['nome']; ?> </p>
         </div>
       </div>
     </div>
@@ -127,7 +131,7 @@ foreach ($resultado_total_itens as $linha) {
       <div class="card bg-danger text-white h-100">
         <div class="card-body">
           <h5 class="card-title">Item Menos Vendido</h5>
-          <p class="card-text"><?php echo $top1['nome'] ?></p>
+          <p class="card-text"><?php echo $ultimo['nome'] ?></p>
         </div>
       </div>
     </div>

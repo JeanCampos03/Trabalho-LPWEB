@@ -42,9 +42,12 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
 </head>
 <body>
 
+
 <div class = "container-login" >
     <a href="/admin/login.php" class="btn-login">Login</a>
 </div>
+
+<h2 class="titulo"> Destaques 🔥</h2>
 
 <div class="container-filtro"> 
   <a href="filtro_todos.php" class ="filtro-todos">Todos</a>
@@ -53,7 +56,6 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
   <a href="index.php" class ="filtro-todos">Destaques</a>
 </div>
 
-<h2 class="titulo"> Destaques 🔥</h2>
 <div class="produtos-grid">
   <?php if (count($destaques) > 0): ?>
     <?php foreach ($destaques as $produto): ?>
