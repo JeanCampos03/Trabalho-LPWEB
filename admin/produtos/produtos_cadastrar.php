@@ -1,3 +1,15 @@
+<?php
+include("../banco.php");
+session_start();
+
+if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true)) {
+  header('location:/Area_Publica/index.php');
+}
+
+$t = "SELECT DISTINCT id,nome FROM categorias";
+$resultT = $con->query($t);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -38,7 +50,11 @@
       </div>
       <div class="form-group">
         <label>ID Categoria:</label>
-        <input type="text" name="idcategoria" class="form-control">
+        <select name="categoria_id" class="form-control">
+          <?php foreach ($resultT as $value) { ?>
+        <option value="<?php echo $value['id'];?>"> <?php echo $value['nome'] ; ?></option>
+        <?php }?>
+        </select>
       </div>
       <div class="d-flex justify-content-between">
         <a href="index.php" class="btn btn-secondary">Voltar</a>

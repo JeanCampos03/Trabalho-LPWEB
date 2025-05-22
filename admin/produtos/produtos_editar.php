@@ -14,8 +14,17 @@ $sql = "SELECT p.*, c.nome nome_categoria
         JOIN categorias c ON p.categoria_id = c.id
         WHERE p.id = $id";
 
+
+
 $resultado = $con->query($sql);
 $dados = mysqli_fetch_assoc($resultado);
+
+
+$t = "SELECT DISTINCT id,nome FROM categorias";
+$resultT = $con->query($t);
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -45,19 +54,23 @@ $dados = mysqli_fetch_assoc($resultado);
     <form action="produtos_editar_salvar.php" method="post">
       <div class="form-group">
         <label>ID:</label>
-        <input type="text" name="id" class="form-control" readonly value="<?= $dados["id"] ?>">
+        <input type="text" name="id" class="form-control" readonly value="<?php echo $dados["id"] ?>">
       </div>
       <div class="form-group">
         <label>Nome do Produto:</label>
-        <input type="text" name="nome" class="form-control" value="<?= $dados["nome"] ?>">
+        <input type="text" name="nome" class="form-control" value="<?php echo $dados["nome"]; ?>">
       </div>
       <div class="form-group">
         <label>Preço:</label>
-        <input type="text" name="preco" class="form-control" value="<?= $dados["preco"] ?>">
+        <input type="text" name="preco" class="form-control" value="<?php echo $dados["preco"]; ?>">
       </div>
       <div class="form-group">
         <label>ID Categoria:</label>
-        <input type="text" name="categoria_id" class="form-control" value="<?= $dados["categoria_id"] ?>">
+        <select name="categoria_id" class="form-control">
+          <?php foreach ($resultT as $value) { ?>
+        <option value="<?php echo $value['id'];?>"> <?php echo $value['nome'] ; ?></option>
+        <?php } ?>
+        </select>
       </div>
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Salvar</button>

@@ -23,18 +23,20 @@ $id = @$_POST["id"];
 $nome = @$_POST["nome"];
 $preco = @$_POST["preco"];
 $categoria_id = @$_POST["categoria_id"];
+var_dump($categoria_id);
 
-
-if ($id == '' || $nome == '' || $preco == '' || $categoria_id == '') {
+if (!isset($id) || !isset($nome ) || !isset($preco) || !isset($categoria_id)) {
         echo "<h1 class='erro'> Existem campos nulos </h1>";
         
         
 } else  {
-        $sql = "UPDATE produtos
-                SET nome='$nome', preco='$preco', categoria_id='$categoria_id'
-                WHERE id='$id'";
+        $mudar = "UPDATE produtos
+                SET nome='$nome', preco='$preco', categoria_id= '$categoria_id'
+                WHERE id= '$id'";
+
+                var_dump($categoria_id);
                 
-                $con->query($sql);
+                $con->query($mudar);
 
         header('location:/admin/produtos/index.php');
 }

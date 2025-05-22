@@ -10,9 +10,11 @@ include('../banco.php');
 $id_produto = $_POST['idproduto'];
 $descricao_produto = $_POST['descricao'];
 $preco_produto = $_POST['preco'];
-$id_categoria = $_POST['idcategoria'];
+$id_categoria = $_POST['categoria_id'];
 
-if ($id_produto == '' || $descricao_produto == '' || $preco_produto == '' || $id_categoria == '') {
+var_dump($id_categoria);
+
+if (!isset($id_produto) || !isset($descricao_produto) || !isset($preco_produto) || !isset($id_categoria)) {
         echo " <h1> Id, descricao, preco ou categoria não pode ser nulo </h1>";
         
         

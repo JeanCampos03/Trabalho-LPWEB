@@ -50,9 +50,9 @@ $logado = $_SESSION['usuario'];
                     <td>DESCRIÇÃO</td>
                     <td>PREÇO</td>
                     <td>CATEGORIA</td>
-                    <td>CATEGORIA NOME</td>
                     <td>OPÇÕES</td>
              </thead>
+
     </body>
 
     <body>
@@ -84,7 +84,6 @@ $logado = $_SESSION['usuario'];
                         <td>" . $linha['id'] . "</td> 
                         <td>" . $linha['nome'] . "</td>
                         <td>" . $linha['preco'] . "</td> 
-                        <td>" . $linha['categoria_id'] . "</td> 
                         <td>" . $linha['nome_categoria'] . "</td>
 
                             <td> 
