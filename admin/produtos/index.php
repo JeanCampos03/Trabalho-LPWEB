@@ -78,7 +78,8 @@ $retorno = $con->query($sql);
         <label for="categ" class="mr-2">Nome da categoria</label>
         <input type="text" name="categ" id="categ" class="form-control mr-2"
             value="<?= htmlspecialchars($FiltroCateg) ?>" />    
-        <button type="submit" class="btn btn-primary">Pesquisar</button>        
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
+        <a href="index.php" class="btn btn-outline-secondary ml-2">Limpar</a>        
     </form>
 
     <table class="table table-hover table-bordered">

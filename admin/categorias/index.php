@@ -1,99 +1,96 @@
-
-<?php 
+<?php
 session_start();
 
-if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-  header('location:index.php');
-  }
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
+    header('location:/Area_Publica/index.php');
+    exit;
+}
 
-$logado = $_SESSION['usuario'];
+include("../banco.php");
 
+if (isset($_GET['descricaoproduto'])) {
+    $_SESSION['filtro_categoria'] = trim($_GET['descricaoproduto']);
+} elseif (!isset($_SESSION['filtro_categoria'])) {
+    $_SESSION['filtro_categoria'] = '';
+}
+
+$filtro = $_SESSION['filtro_categoria'];
+
+$sql = "SELECT * FROM categorias";
+if ($filtro !== '') {
+    $filtro_escapado = $con->real_escape_string($filtro);
+    $sql .= " WHERE nome LIKE '%$filtro_escapado%'";
+}
+
+$sql .= " ORDER BY id";
+$retorno = $con->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-    <title>Consulta de Produtos</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-        crossorigin="anonymous"></script>
-
+    <title>Consulta de Categorias</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
-
 <body>
-    <a href="criar_categoria.php" class="btn btn-success ">
-        CADASTRAR
-    </a>
+    <div class="container">
+        <div class="mb-3 d-flex justify-content-between">
+            <a href="criar_categoria.php" class="btn btn-success">Cadastrar</a>
+            <a href="/admin/dashboard.php" class="btn btn-secondary">Dashboard</a>
+        </div>
 
-    <a href="/admin/dashboard.php" class="btn btn-secondary ">
-        DASHBOARD
-    </a>
-
-    <body>
-        <h2>Pesquise pela descrição</h2>
-        <form action="index.php" method="get">
-            <label for="aluno">Descrição do item</label>
-            <input type="text" name="descricaoproduto">
-
-            <input type="submit" value="Enviar">
+        <h2>Pesquisar por nome da categoria</h2>
+        <form action="index.php" method="get" class="form-inline mb-4">
+            <input type="text" name="descricaoproduto" class="form-control mr-2" value="<?= htmlspecialchars($filtro) ?>">
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+            <a href="index.php" class="btn btn-outline-secondary ml-2">Limpar</a>
         </form>
 
-        <table class = 'table table-hower '>
-             <thead>
-                    <td>ID PRODUTO</td> 
-                    <td>DESCRIÇÃO CATEGORIA</td>
-                    <td>OPÇÕES</td>
-             </thead>
-    </body>
-
-    <body>
-
-        <tbody>
-
-            <?php 
-            include ("../banco.php");
-
-            $descricao_item = "";
-
-            if (isset($_GET['descricaoproduto'])) // isset() - essa função significa "existe?"
-            {
-                $descricao_item = ($_GET['descricaoproduto']);
-            }
-
-            $sql = "SELECT *
-                    FROM categorias;";
-
-            $retorno = $con->query($sql);
-
-            if ($retorno) {
-            } foreach ($retorno as $linha)
-                echo "
-                    <tr>
-                    <td>" . $linha['id'] . "</td> 
-                    <td>" . $linha['nome'] . "</td>
-
-                            <td> 
-                            <a href='/admin/categorias/categorias_deletar.php?id=" . $linha['id'] . " '
-                            class='btn btn-danger' >🗑️                                
-                            </a>
-
-                            <a href='/admin/categorias/categorias_editar.php?id=" . $linha['id'] . " '
-                            class='btn btn-primary' >✏️
-                            </a>
-
+        <table class='table table-hover table-bordered'>
+            <thead class="thead-light">
+                <tr>
+                    <th>ID Categoria</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($retorno && $retorno->num_rows > 0) {
+                    foreach ($retorno as $linha):
+                        ?>
+                        <tr>
+                            <td><?= $linha['id'] ?></td>
+                            <td><?= htmlspecialchars($linha['nome']) ?></td>
+                            <td>
+                                <form action="categorias_editar.php" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="<?= $linha['id'] ?>">
+                                    <button type="submit" class="btn btn-primary btn-sm">✏️</button>
+                                </form>
+                                <form action="categorias_deletar.php" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir esta categoria?');">
+                                    <input type="hidden" name="id" value="<?= $linha['id'] ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm">🗑️</button>
+                                </form>
                             </td>
-                    </tr>
-                    ";
-
-            
-            ?>
-        </tbody>
-    </body>
-
+                        </tr>
+                        <?php
+                    endforeach;
+                } else {
+                    echo '<tr><td colspan="3" class="text-center">Nenhuma categoria encontrada.</td></tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
 </html>
