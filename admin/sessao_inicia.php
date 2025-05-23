@@ -20,11 +20,5 @@ if (mysqli_num_rows($resultado) > 0) {
     $_SESSION['usuario'] = $usuario;
     $_SESSION['senha'] = $senha;
     header('location:dashboard.php');
-
-} else {
-    unset($_SESSION['login']);
-    unset($_SESSION['senha']);
-    header('location:login_novo.php');
 }
-
 ?>

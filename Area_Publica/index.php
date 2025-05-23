@@ -1,70 +1,89 @@
 <?php
-include('../admin/banco.php');  
+session_start();
+include('../admin/banco.php');
 
-$consulta_produtos1 = "SELECT NOME,PRECO 
-                       FROM PRODUTOS 
-                       WHERE ID = 1";
+if (isset($_GET['id'])) {
+    $_SESSION['id'] = $_GET['id'];
+}
 
-$consulta_produtos2 = "SELECT NOME,PRECO 
-                       FROM PRODUTOS 
-                       WHERE ID = 2";
+if (!isset($_SESSION['id'])) {
+    header('location:/Area_Publica/filtro_todos.php');
+    exit;
+}
 
-$consulta_produtos3 = "SELECT NOME,PRECO 
-                       FROM PRODUTOS 
-                       WHERE ID = 3";
+$id = $_SESSION['id'];
 
-$resultado1 = $con-> query($consulta_produtos1);
-$resultado2 = $con-> query($consulta_produtos2);
-$resultado3 = $con-> query($consulta_produtos3);
+$filtros = "SELECT DISTINCT id, nome as nome_categoria FROM categorias";
 
-foreach ($resultado1 as $linha1);
-foreach ($resultado2 as $linha2);
-foreach ($resultado3 as $linha3);
+$sql_todos = "SELECT c.id, c.nome as nome_categoria, p.nome produto_nome, p.preco produto_preco, p.id produto_id
+              FROM produtos p
+              JOIN categorias c ON p.categoria_id = c.id
+              WHERE c.id = '$id'";
 
-$stmt = $con->query("SELECT id, nome FROM categorias");
+$titulo_h = "SELECT DISTINCT id, nome as nome_categoria
+             FROM categorias
+             WHERE id = '$id'";
 
+$resultado_todos = $con->query($sql_todos);
+$resultado_filtros = $con->query($filtros);
+$resultado_h = $con->query($titulo_h);
+
+$produtos = [];
+if ($resultado_todos && $resultado_todos->num_rows > 0) {
+    foreach ($resultado_todos as $linha) {
+        $produtos[] = $linha;
+    }
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title> FUT CAMISAS</title>
+  <title>FUT CAMISAS</title>
   <link rel="icon" type="image/png" href="/images/title.png">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 
-<div class = "container-login" >
+<div class="container-login">
     <a href="/admin/login.php" class="btn-login">Login</a>
 </div>
 
-  <section class="produtos-section">
-    <h2 class="titulo">Destaques</h2>
-    <div class="produtos-container">
-      <div class="produto">
-        <img src="/images/palmeiras.png" alt="Produto 1">
-        <h3> <?php echo $linha2['NOME'] ?> </h3>
-        <p class="preco"><span>Preço: R$</span> <?php echo $linha2['PRECO']; ?> </p>
-        <a href="#">Comprar</a>
-      </div>
+<div class="layout">
 
-      <div class="produto">
-        <img src="/images/spfc.png" alt="Produto 2">
-        <h3> <?php echo $linha1['NOME'] ?> </h3>
-        <p class="preco"><span>Preço: R$</span> <?php echo $linha1['PRECO']; ?></p>
-        <a href="#">Comprar</a>
-      </div>
-
-      <div class="produto">
-        <img src="/images/sccp.png" alt="Produto 3">
-        <h3> <?php echo $linha3['NOME'] ?> </h3>
-        <p class="preco"><span>Preço: R$</span> <?php echo $linha3['PRECO']; ?> </p>
-        <a href="#">Comprar</a>
+    <div class="menu-categorias">
+      <h3>Categorias</h3>
+      <div class="produtos-grid">
+        <?php foreach ($resultado_filtros as $linhas) { ?>
+          <a class="menu-categorias-button" href="index.php?id=<?php echo $linhas['id']; ?>">
+            <?php echo $linhas['nome_categoria']; ?>
+          </a>
+        <?php } ?>
+        <a class="menu-categorias-button" href="filtro_todos.php">Todos</a>
       </div>
     </div>
-  </section>
 
+    <div class="conteudo">
+      <?php foreach ($resultado_h as $linha) { ?>
+        <h2 class="titulo">Filtrando por <?php echo $linha['nome_categoria']; ?></h2>
+      <?php } ?>
 
+      <div class="produtos-grid">
+        <?php if (count($produtos) > 0): ?>
+          <?php foreach ($produtos as $produto): ?>
+            <div class="produto">
+              <img src="/images/<?php echo $produto['produto_id']; ?>.png" alt="<?php echo $produto['produto_nome']; ?>">
+              <h3><?php echo $produto['produto_nome']; ?></h3>
+              <p class="preco">R$ <?php echo number_format($produto['produto_preco'], 2, ',', '.'); ?></p>
+              <a href="compra.php?id=<?php echo $produto['produto_id']; ?>">Comprar</a>
+            </div>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <p>Nenhum produto cadastrado.</p>
+        <?php endif; ?>
+      </div>
+    </div>
+
+</div>
 </body>
 </html>

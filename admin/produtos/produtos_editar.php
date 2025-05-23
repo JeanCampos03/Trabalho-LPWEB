@@ -1,97 +1,95 @@
 <?php
-
-include("../banco.php");
 session_start();
+include("../banco.php");
 
-if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-  header('location:in/Area_Publica/index.php');
-  }
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
+  header('location:/Area_Publica/index.php');
+  exit;
+}
 
 $logado = $_SESSION['usuario'];
-/* 
-**   http://localhost/outros/aluno_alterar.php?ra=55555
-**   colocou link é GET, pois vai na URL;
-**   1- Receber via GET o RA do aluno.
-**   
-**   2- Buscar aluno no banco de dados.
-**
-**   3- Iremos mostrar os dados dele na tela dentro do form 
-**
-**   4- Enviar os dados alterados para o servidor salvar
-*/
 
-$id = @$_GET["id"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $_SESSION['id_produto_para_editar'] = $_POST['id'];
+}
 
-//echo $ra;
+$id = $_SESSION['id_produto_para_editar'] ?? null;
 
-$sql = "SELECT p.*, c.nome nome_categoria 
-                    FROM produtos p
-                    JOIN categorias c
-                    ON p.categoria_id = c.id
-                    WHERE p.id = $id";
+if (!$id) {
+  echo "<h3>ID do produto não foi informado.</h3>";
+  echo "<a href='/admin/produtos/index.php' class='btn btn-secondary mt-3'>Voltar</a>";
+  exit;
+}
 
-$resultado = $con-> query($sql);
+$sql = "SELECT p.*, c.nome AS nome_categoria 
+        FROM produtos p
+        JOIN categorias c ON p.categoria_id = c.id
+        WHERE p.id = '$id'";
 
+$resultado = $con->query($sql);
 $dados = mysqli_fetch_assoc($resultado);
 
-?>
+if (!$dados) {
+  echo "<h3>Produto não encontrado.</h3>";
+  echo "<a href='/admin/produtos/index.php' class='btn btn-secondary mt-3'>Voltar</a>";
+  exit;
+}
 
+$t = "SELECT id, nome FROM categorias ORDER BY nome";
+$resultT = $con->query($t);
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        
-    ALTERA PRODUTO <?php echo $dados["id"]; ?>
-
-    </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"crossorigin="anonymous"></script>
-
+  <meta charset="UTF-8">
+  <title>Alterar Produto <?= htmlspecialchars($dados["id"]) ?></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 40px;
+    }
+    .container-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-    <form action="produtos_editar_salvar.php" method="post" >
-        <div>
-        <span> ID :</span>
-        <input type="text" name="id" readonly
-        value="<?php echo $dados["id"]; ?>" 
-        />
-        </div>
-
-
-        <div> <!--div é como se fosse um coringa é invisivel ao olho nu, mas conseguimos dar formato a ela.-->
-        <span> Nome do aluno :</span>
-        <input type="text" name="nome"
-        value="<?php echo $dados["nome"]; ?>"
-        />
-        
-        </div>
-
-        <div>
-        <span> Preco :</span>
-        <input type="text" name="preco"        
-        value="<?php echo $dados["preco"]; ?>"
-        />
-
-        <div>
-        <span> ID Categoria :</span>
-        <input type="text" name="categoria_id"        
-        value="<?php echo $dados["categoria_id"]; ?>"
-        />
-
-        </div>
-        
-        <div>
-            
-        <input type="submit" value="Salvar"
-            class="btn btn-primary"/>
-
-        <a href="/admin/produtos/index.php"
-            class="btn btn-secondary" >
-            Voltar </a>
-        </div>
+  <div class="container-form">
+    <h2 class="text-center mb-4">Editar Produto</h2>
+    <form action="produtos_editar_salvar.php" method="post">
+      <div class="form-group">
+        <label>ID:</label>
+        <input type="text" name="id" class="form-control" readonly value="<?= htmlspecialchars($dados["id"]) ?>">
+      </div>
+      <div class="form-group">
+        <label>Nome do Produto:</label>
+        <input type="text" name="nome" class="form-control" value="<?= htmlspecialchars($dados["nome"]) ?>">
+      </div>
+      <div class="form-group">
+        <label>Preço:</label>
+        <input type="text" name="preco" class="form-control" value="<?= htmlspecialchars($dados["preco"]) ?>">
+      </div>
+      <div class="form-group">
+        <label>Categoria:</label>
+        <select name="categoria_id" class="form-control">
+          <?php foreach ($resultT as $cat): ?>
+            <option value="<?= $cat['id'] ?>" <?= $cat['id'] == $dados['categoria_id'] ? 'selected' : '' ?>>
+              <?= htmlspecialchars($cat['nome']) ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="/admin/produtos/index.php" class="btn btn-secondary">Voltar</a>
+      </div>
     </form>
+  </div>
 </body>
 </html>

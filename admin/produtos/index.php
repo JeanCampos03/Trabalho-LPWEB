@@ -1,13 +1,54 @@
-
-<?php 
+<?php
 session_start();
 
-if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-  header('location:index.php');
-  }
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
+    header('Location: index.php');
+    exit;
+}
 
 $logado = $_SESSION['usuario'];
+
+include("../banco.php");
+
+if (isset($_GET['descricaoproduto'])) {
+    $_SESSION['filtro_descricao'] = trim($_GET['descricaoproduto']);
+} elseif (!isset($_SESSION['filtro_descricao'])) {
+    $_SESSION['filtro_descricao'] = '';
+}
+
+if (isset($_GET['categ'])) {
+    $_SESSION['filtro_categ'] = trim($_GET['categ']);
+} elseif (!isset($_SESSION['filtro_categ'])) {
+    $_SESSION['filtro_categ'] = '';
+}
+
+$filtro = $_SESSION['filtro_descricao'];
+$FiltroCateg = $_SESSION['filtro_categ'];
+
+$sql = "SELECT p.*, c.nome AS nome_categoria 
+        FROM produtos p
+        INNER JOIN categorias c ON p.categoria_id = c.id ";
+
+if ($filtro !== '' && $FiltroCateg == '') {
+    $filtro_result = $con->real_escape_string($filtro);
+    $sql .= "WHERE p.nome LIKE '%$filtro_result%' ";
+}
+elseif ($FiltroCateg !== '' && $filtro == ''){
+    $filtro_result = $con->real_escape_string($FiltroCateg);
+    $sql .= "WHERE c.nome LIKE '%$filtro_result%' ";       
+}
+elseif($FiltroCateg !== '' && $filtro !== ''){
+    $filtro_result = $con->real_escape_string($filtro);
+    $filtro_resultCateg = $con->real_escape_string($FiltroCateg);
+    $sql .= "WHERE p.nome LIKE '%$filtro_result%' 
+            and c.nome LIKE '%$filtro_resultCateg%'";       
+}
+
+
+
+$sql .= "ORDER BY p.id";
+
+$retorno = $con->query($sql);
 
 ?>
 
@@ -15,93 +56,73 @@ $logado = $_SESSION['usuario'];
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Consulta de Produtos</title>
-    <link rel="icon" type="image/png" href="/images/title.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-        crossorigin="anonymous"></script>
-
+    <link rel="icon" type="image/png" href="/images/title.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
 </head>
 
-<body>
-    <a href="produtos_cadastrar.php" class="btn btn-success ">
-        CADASTRAR
-    </a>
+<body class="p-4">
 
-    <a href="/admin/dashboard.php" class="btn btn-secondary ">
-        DASHBOARD
-    </a>
+    <div class="mb-3">
+        <a href="produtos_cadastrar.php" class="btn btn-success mr-2">Cadastrar</a>
+        <a href="/admin/dashboard.php" class="btn btn-secondary">Dashboard</a>
+    </div>
 
-    <body>
-        <h2>Pesquise pela descrição</h2>
-        <form action="index.php" method="get">
-            <label for="aluno">Descrição do item</label>
-            <input type="text" name="descricaoproduto">
+    <h2>Filtro</h2>
+    <form action="index.php" method="get" class="form-inline mb-4">
+        <label for="descricaoproduto" class="mr-2">Descrição do item</label>
+        <input type="text" name="descricaoproduto" id="descricaoproduto" class="form-control mr-2"
+            value="<?= htmlspecialchars($filtro) ?>" />
+        <label for="categ" class="mr-2">Nome da categoria</label>
+        <input type="text" name="categ" id="categ" class="form-control mr-2"
+            value="<?= htmlspecialchars($FiltroCateg) ?>" />    
+        <button type="submit" class="btn btn-primary">Pesquisar</button>        
+    </form>
 
-            <input type="submit" value="Enviar">
-        </form>
-
-        <table class = 'table table-hower'>
-             <thead>
-                    <td>ID PRODUTO</td> 
-                    <td>DESCRIÇÃO</td>
-                    <td>PREÇO</td>
-                    <td>CATEGORIA</td>
-                    <td>CATEGORIA NOME</td>
-                    <td>OPÇÕES</td>
-             </thead>
-    </body>
-
-    <body>
-
+    <table class="table table-hover table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>ID Produto</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
         <tbody>
+            <?php
+            if ($retorno && $retorno->num_rows > 0) {
+                while ($linha = $retorno->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . (int)$linha['id'] . "</td>";
+                    echo "<td>" . htmlspecialchars($linha['nome']) . "</td>";
+                    echo "<td>R$ " . number_format($linha['preco'], 2, ',', '.') . "</td>";
+                    echo "<td>" . htmlspecialchars($linha['nome_categoria']) . "</td>";
+                    echo "<td>";
+                    
+                    echo "<form action='produtos_editar.php' method='post' style='display:inline;'>
+                            <input type='hidden' name='id' value='" . (int)$linha['id'] . "'>
+                            <button type='submit' class='btn btn-primary btn-sm' title='Editar'>✏️</button>
+                          </form> ";
 
-            <?php 
-            include ("../banco.php");
+                    echo "<form action='produtos_deletar.php' method='post' style='display:inline;' 
+                            onsubmit=\"return confirm('Tem certeza que deseja excluir este produto?');\">
+                            <input type='hidden' name='id' value='" . (int)$linha['id'] . "'>
+                            <button type='submit' class='btn btn-danger btn-sm' title='Deletar'>🗑️</button>
+                          </form>";
 
-            $descricao_item = "";
-
-            if (isset($_GET['descricaoproduto'])) // isset() - essa função significa "existe?"
-            {
-                $descricao_item = ($_GET['descricaoproduto']);
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo '<tr><td colspan="5" class="text-center">Nenhum produto encontrado.</td></tr>';
             }
-
-            $sql = "SELECT p.*, c.nome nome_categoria 
-                    FROM produtos p
-                    JOIN categorias c
-                    ON p.categoria_id = c.id";
-
-            $retorno = $con->query($sql);
-
-            if ($retorno) {
-            } foreach ($retorno as $linha)
-                echo "
-                    <tr>
-                        <td>" . $linha['id'] . "</td> 
-                        <td>" . $linha['nome'] . "</td>
-                        <td>" . $linha['preco'] . "</td> 
-                        <td>" . $linha['categoria_id'] . "</td> 
-                        <td>" . $linha['nome_categoria'] . "</td>
-
-                            <td> 
-                                <a href='/admin/produtos/produtos_deletar.php?id=" . $linha['id'] . " '
-                                class='btn btn-danger' >🗑️                                
-                                </a>
-
-                                <a href='/admin/produtos/produtos_editar.php?id=" . $linha['id'] . " '
-                                class='btn btn-primary' >✏️
-                                </a>
-
-                            </td>
-                    </tr>
-                    ";
-
-            
             ?>
         </tbody>
-    </body>
+    </table>
+
+</body>
 
 </html>

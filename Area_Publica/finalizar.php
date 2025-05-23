@@ -1,20 +1,15 @@
 <?php
+session_start();
 include('../admin/banco.php');
 
-if (!isset($_POST['produto_id']) || !isset($_POST['quantidade'])) {
-    echo "Nenhum produto recebido.";
+if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+    echo "Carrinho vazio.";
     exit;
 }
 
-$produtos = $_POST['produto_id'];
-$quantidades = $_POST['quantidade'];
-
-if (count($produtos) !== count($quantidades)) {
-    echo "Erro nos dados enviados.";
-    exit;
-}
-
+$produtos = $_SESSION['carrinho'];
 $data = date('Y-m-d H:i:s');
+
 $sql_venda = "INSERT INTO vendas (data_venda) VALUES ('$data')";
 if (mysqli_query($con, $sql_venda)) {
     $venda_id = mysqli_insert_id($con);
@@ -23,10 +18,7 @@ if (mysqli_query($con, $sql_venda)) {
     exit;
 }
 
-for ($i = 0; $i < count($produtos); $i++) {
-    $produto_id = $produtos[$i];
-    $quantidade = $quantidades[$i];
-
+foreach ($produtos as $produto_id => $quantidade) {
     if ($quantidade > 0) {
         $sql_item = "INSERT INTO vendasitens (venda_id, produto_id, quantidade) VALUES ($venda_id, $produto_id, $quantidade)";
         if (!mysqli_query($con, $sql_item)) {
@@ -35,17 +27,31 @@ for ($i = 0; $i < count($produtos); $i++) {
         }
     }
 }
+
+unset($_SESSION['carrinho']);
+
+$contagem_vendas = "SELECT COUNT(id) AS c FROM vendas";
+$result = $con->query($contagem_vendas);
+$n_vendas = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Compra Finalizada</title>
+  <meta charset="UTF-8">
+  <title>Compra Finalizada</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Compra finalizada com sucesso!</h2>
-    <p>Número da venda: <?= $venda_id ?></p>
-    <a href="produtos.php">Voltar à loja</a>
+<body class="bg-light">
+
+  <div class="container text-center mt-5">
+    <div class="card shadow-sm p-4">
+      <h1 class="text-success mb-3">Obrigado pela sua compra! ⚽</h1>
+      <p class="fs-5">Seu pedido foi finalizado com sucesso.</p>
+      <p class="fs-5">Número do Pedido: <strong>#<?= $n_vendas['c']; ?></strong></p>
+      <a href="index.php" class="btn btn-primary mt-4">Voltar para a loja</a>
+    </div>
+  </div>
+
 </body>
 </html>

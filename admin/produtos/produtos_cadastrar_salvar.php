@@ -1,31 +1,40 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<title> ERROR </title>
-<link rel="icon" type="image/png" href="\images\title.png">
-
-
 <?php
+session_start();
 include('../banco.php');
 
-$id_produto = $_POST['idproduto'];
-$descricao_produto = $_POST['descricao'];
-$preco_produto = $_POST['preco'];
-$id_categoria = $_POST['idcategoria'];
+$_SESSION['form_data'] = [
+    'idproduto'     => $_POST['idproduto'] ?? '',
+    'descricao'     => $_POST['descricao'] ?? '',
+    'preco'         => $_POST['preco'] ?? '',
+    'categoria_id'  => $_POST['categoria_id'] ?? ''
+];
 
-if ($id_produto == '' || $descricao_produto == '' || $preco_produto == '' || $id_categoria == '') {
-        echo " <h1> Id, descricao, preco ou categoria não pode ser nulo </h1>";
-        
-        
-} else  {
-                $sql_create= "INSERT INTO PRODUTOS (ID, NOME, PRECO, CATEGORIA_ID) 
-                VALUES ('$id_produto', '$descricao_produto', '$preco_produto', '$id_categoria' )";
-                
-        $con->query($sql_create);
-
-        header('location:/admin/produtos/index.php');
+if (
+    empty($_SESSION['form_data']['idproduto']) ||
+    empty($_SESSION['form_data']['descricao']) ||
+    empty($_SESSION['form_data']['preco']) ||
+    empty($_SESSION['form_data']['categoria_id'])
+) {
+    $_SESSION['error_message'] = "Todos os campos são obrigatórios.";
+    header('Location: produtos_cadastrar.php');
+    exit;
 }
 
-?>
+$id         = $con->real_escape_string($_SESSION['form_data']['idproduto']);
+$descricao  = $con->real_escape_string($_SESSION['form_data']['descricao']);
+$preco      = floatval(str_replace(',', '.', $_SESSION['form_data']['preco']));
+$categoria  = intval($_SESSION['form_data']['categoria_id']);
 
-<a href="/admin/produtos/produtos_cadastrar.php" class="btn btn-primary"> Tentar Novamente </a>
-</html>
+$sql_create = "INSERT INTO produtos (id, nome, preco, categoria_id) 
+               VALUES ('$id', '$descricao', '$preco', '$categoria')";
+
+if ($con->query($sql_create)) {
+    unset($_SESSION['form_data']);
+    header('Location: index.php');
+    exit;
+} else {
+    $_SESSION['error_message'] = "Erro ao cadastrar o produto: " . $con->error;
+    header('Location: produtos_cadastrar.php');
+    exit;
+}
+?>

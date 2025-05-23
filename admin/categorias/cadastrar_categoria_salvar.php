@@ -1,45 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<title>Fut Camisas</title>
-<link rel="icon" type="image/png" href="/images/title.png">
-
 <?php
-include ('../banco.php');
+session_start();
+include("../banco.php");
 
-$categoria_id = $_POST['idcategoria'];
-$categoria_nome = $_POST['categorianome'];
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
+    header('location:/Area_Publica/index.php');
+    exit;
+}
 
+$nome = trim($_POST['nome_categoria'] ?? '');
 
-if ($categoria_id == '' || $categoria_nome == '') {
-        echo "Erro - Não pode haver valores nulos";
-        
-} else {
-        $sql_id = "SELECT * FROM CATEGORIAS 
-           WHERE id = '$categoria_id'";
+if ($nome === '') {
+    echo "<h3 class='text-center text-danger mt-5'>O nome da categoria é obrigatório.</h3>";
+    echo "<div class='text-center'><a href='criar_categoria.php' class='btn btn-warning mt-3'>Voltar</a></div>";
+    exit;
+}
 
-        $sql_nome = "SELECT * FROM CATEGORIAS 
-           WHERE nome = '$categoria_nome'";
+$sql = "INSERT INTO categorias (nome) VALUES ('$nome')";
+$con->query($sql);
 
-        $con->query($sql_id);
-        $con->query($sql_nome);
-
-
-        $resultado_id = $con->query($sql_id);
-        $resultado_nome = $con->query($sql_nome);
-
-        if (mysqli_num_rows($resultado_id) > 0 || mysqli_num_rows($resultado_nome ) > 0) {
-                echo "id ou categoria já existe!";
-        } else  {
-
-        $sql_create = "INSERT INTO categorias (id, nome) 
-        VALUES ('$categoria_id', '$categoria_nome')";
-
-        $con->query($sql_create);
-        header('location:/admin/categorias/index.php');
-        }
-        }
-
-?>
-
-<a href="/admin/categorias/index.php" class="btn btn-primary"> Tentar Novamente </a>
-</html>
+header("Location: index.php");
+exit;

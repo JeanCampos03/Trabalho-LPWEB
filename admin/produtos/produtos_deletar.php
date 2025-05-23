@@ -1,15 +1,29 @@
-
 <?php
+session_start();
 include("../banco.php");
 
-$id_produto = @$_GET['id'];
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
+    header('Location: /Area_Publica/index.php');
+    exit;
+}
 
-$sql_delete= "DELETE FROM produtos 
-WHERE id = '$id_produto'";
-        
-$con->query($sql_delete);
+$id_produto = $_POST['id'] ?? null;
 
-header('location:/admin/produtos/index.php');
+if (!$id_produto) {
+    $_SESSION['error_message'] = "ID do produto não foi informado.";
+    header('Location: index.php');
+    exit;
+}
 
+$id_produto = $con->real_escape_string($id_produto);
+$sql_delete = "DELETE FROM produtos WHERE id = '$id_produto'";
 
+if ($con->query($sql_delete)) {
+    $_SESSION['success_message'] = "Produto excluído com sucesso.";
+} else {
+    $_SESSION['error_message'] = "Erro ao excluir o produto: " . $con->error;
+}
+
+header('Location: index.php');
+exit;
 ?>
