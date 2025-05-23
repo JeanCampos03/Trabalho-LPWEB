@@ -15,6 +15,15 @@ $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasi
                   ORDER BY qtde DESC";
 $destaques = $con->query($sql_destaques)->fetch_all(MYSQLI_ASSOC);
 
+$primeiro = ['nome' => 'Sem vendas ainda.'];
+$ultimo = ['nome' => 'Sem vendas ainda.'];
+
+if (count($destaques) > 0) {
+  $primeiro = $destaques[0];
+  $ultimo = $destaques[count($destaques) - 1];
+}
+
+
 $produtos = $con->query("SELECT id, nome, preco FROM produtos")->fetch_all(MYSQLI_ASSOC);
 $vendas = $con->query("SELECT vi.produto_id, COUNT(vi.produto_id) AS numero_vendas_itens 
                        FROM vendasitens vi JOIN vendas v ON v.id = vi.venda_id 
@@ -65,7 +74,7 @@ FROM vendasitens")->fetch_assoc();
       <div class="card bg-warning text-dark h-100">
         <div class="card-body">
           <h5 class="card-title">Item Mais Vendido</h5>
-          <p class="card-text">Em breve...</p>
+          <p class="card-text"><?= $primeiro['nome'] ?></p>
         </div>
       </div>
     </div>
@@ -73,7 +82,7 @@ FROM vendasitens")->fetch_assoc();
       <div class="card bg-danger text-white h-100">
         <div class="card-body">
           <h5 class="card-title">Item Menos Vendido</h5>
-          <p class="card-text">Em breve...</p>
+          <p class="card-text"><?= $ultimo['nome'] ?></p>
         </div>
       </div>
     </div>
