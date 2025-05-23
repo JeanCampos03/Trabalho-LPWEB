@@ -89,12 +89,15 @@ FROM vendasitens")->fetch_assoc();
   </div>
 
   <nav class="mb-4">
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills justify-content-center">
       <li class="nav-item">
-        <a class="btn btn-secondary" href="categorias/index.php">Categorias</a>
+        <a class="btn btn-secondary mx-2" href="categorias/index.php">Categorias</a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-secondary" href="produtos/index.php">Produtos</a>
+        <a class="btn btn-secondary mx-2" href="produtos/index.php">Produtos</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-secondary mx-2" href="vendas/index.php">Detalhe vendas</a>
       </li>
     </ul>
   </nav>
