@@ -149,13 +149,16 @@ foreach ($resultado_total_itens as $linha) {
       <li class="nav-item">
         <a class="nav-link" href="produtos/index.php">Produtos</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="vendas/index.php">Detalhe Vendas</a>
+      </li>
     </ul>
   </nav>
 
   <h2 class="mb-3">Top 10 Mais Vendidos</h2>
   <div class="row row-cols-1 row-cols-md-5 g-4">
     <?php if (count($destaques) > 0): ?>
-      <?php foreach ($destaques as $produto): 
+      <?php foreach ($destaques as $produto):
         $conta_vendas = 0;
         foreach ($vendas as $vendas_prod) {
           if ($vendas_prod['produto_id'] == $produto['id']) {
@@ -163,25 +166,21 @@ foreach ($resultado_total_itens as $linha) {
             break;
           }
         } ?>
-        <div class="col">
-          <div class="card h-100">
-            <img src="/images/<?= $produto['id'] ?>.png" class="card-img-top" alt="<?= $produto['nome'] ?>">
-            <div class="card-body">
+        <div class="produtos-grid">
+          <div class="produto">
+            <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
               <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="card-text">Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-              <p class="card-text">ID: <?= $produto['id'] ?></p>
-              <p class="card-text">Vendidos: <?= $conta_vendas ?></p>
-            </div>
-          </div>
+              <p class="preco">Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
+              <p>ID: <?= $produto['id'] ?></p>
+              <p>Vendidos: <?= $conta_vendas ?></p>
+          </div> 
         </div>
-      <?php endforeach; ?>
-    <?php else: ?>
-      <div class="col-12">
-        <p class="text-muted">Nenhuma venda ainda.</p>
-      </div>
-    <?php endif; ?>
-  </div>
-</div>
+            <?php endforeach; ?>
+          <?php else: ?>
+              <p>Nenhuma venda ainda.</p>
+          <?php endif; ?>
+       
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
