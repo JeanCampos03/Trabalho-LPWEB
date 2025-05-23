@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </form>
 
           <div class="mt-3 text-center">
-            <a href="index.php" class="btn btn-link">Voltar a loja</a>
+            <a href="index.php" class="btn btn-secondary">Voltar a loja</a>
           </div>
         </div>
       </div>
