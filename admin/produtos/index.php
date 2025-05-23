@@ -10,6 +10,14 @@ $logado = $_SESSION['usuario'];
 
 include("../banco.php");
 
+if (isset($_GET['limpar'])) {
+    unset($_SESSION['filtro_descricao']);
+    unset($_SESSION['filtro_categ']);
+    header("Location: index.php"); 
+    exit;
+}
+
+
 if (isset($_GET['descricaoproduto'])) {
     $_SESSION['filtro_descricao'] = trim($_GET['descricaoproduto']);
 } elseif (!isset($_SESSION['filtro_descricao'])) {
@@ -79,7 +87,7 @@ $retorno = $con->query($sql);
         <input type="text" name="categ" id="categ" class="form-control mr-2"
             value="<?= htmlspecialchars($FiltroCateg) ?>" />    
         <button type="submit" class="btn btn-primary">Pesquisar</button>
-        <a href="index.php" class="btn btn-outline-secondary ml-2">Limpar</a>        
+        <a href="index.php?limpar=1" class="btn btn-outline-secondary ml-2">Limpar</a>
     </form>
 
     <table class="table table-hover table-bordered">

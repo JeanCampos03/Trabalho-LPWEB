@@ -53,7 +53,7 @@ $retorno = $con->query($sql);
         <form action="index.php" method="get" class="form-inline mb-4">
             <input type="text" name="descricaoproduto" class="form-control mr-2" value="<?= htmlspecialchars($filtro) ?>">
             <button type="submit" class="btn btn-primary">Pesquisar</button>
-            <a href="index.php" class="btn btn-outline-secondary ml-2">Limpar</a>
+            <a href="index.php?descricaoproduto=" class="btn btn-outline-secondary ml-2">Limpar</a> 
         </form>
 
         <table class='table table-hover table-bordered'>
