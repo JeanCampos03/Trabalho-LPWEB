@@ -159,7 +159,7 @@ FROM vendasitens")->fetch_assoc();
           <div class="produto">
             <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
               <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="preco">Preço: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
+              <p class="preco">Valor vendido: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
               <p>ID: <?= $produto['id'] ?></p>
               <p>Vendidos: <?php echo $produto['qtde'] ?></p>
           </div> 
@@ -202,7 +202,7 @@ FROM vendasitens")->fetch_assoc();
           <div class="produto">
             <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
               <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="preco">Preço: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
+              <p class="preco">Valor Vendido: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
               <p>ID: <?= $produto['id'] ?></p>
               <p>Vendidos: <?php echo $produto['qtde'] ?></p>
           </div> 
