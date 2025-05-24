@@ -8,19 +8,6 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
 include('../admin/banco.php');
 $logado = $_SESSION['usuario'];
 
-
-
-if (isset($_GET['limpar_todos']) ) {
-    if (($_GET['limpar_todos'] == 1)) {
-        $_SESSION['todas_vendas'] = true;
-    } else {
-        $_SESSION['todas_vendas'] = null;
-
-    }
-}
-
-
-
 $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasitens.quantidade) AS qtde
                   FROM vendasitens
                   INNER JOIN produtos ON produtos.id = vendasitens.produto_id
@@ -132,20 +119,8 @@ FROM vendasitens")->fetch_assoc();
     </ul>
   </nav>
 
-<?php if ((!isset ($_SESSION['todas_vendas'])) ) {?>
-<!-- Cria uma combobox para exibir o top 10 ou todos os produtos vendidos --> 
-    <div style="text-align: right; font-family: 'Arial', sans-serif;">
-      <form method="GET" action="dashboard.php">
-      <select name="limpar_todos" >
-      <option value="0"> TOP 10</option>
-      <option value="1">TODOS</option>
-      </select>
-      <button type="submit">🔍</button>
-    </div>
-
-    <h3 style="text-align: left; ">TOP 10 MAIS VENDIDO</h3>
-
-  <div class="row row-cols-1 row-cols-md-5 g-4">   
+  <h2 class="mb-3">Top 10 Mais Vendidos</h2>
+  <div class="row row-cols-1 row-cols-md-5 g-4">
     <?php $i = 0 ; if (count($destaques) > 0 ): ?>
       <?php foreach ($destaques as $produto):
         $conta_vendas = 0;
@@ -159,69 +134,16 @@ FROM vendasitens")->fetch_assoc();
           <div class="produto">
             <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
               <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="preco">Preço: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
+              <p class="preco">Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
               <p>ID: <?= $produto['id'] ?></p>
               <p>Vendidos: <?php echo $produto['qtde'] ?></p>
           </div> 
         </div>
-        <?php $i++; } ?>        
+        <?php $i++; }?>
+
             <?php endforeach; ?>
-           <?php var_dump($_SESSION['todas_vendas']);?>
-          <?php  if (isset ($_SESSION['todas_vendas'])){?>
-            <?php echo "oiii";?>
-
-            <?php }?>
-
           <?php else: ?>
               <p>Nenhuma venda ainda.</p>
           <?php endif; ?>
-<?php }else if ((isset ($_SESSION['todas_vendas'])) ) {?>
-
-    <div style="text-align: right; font-family: 'Arial', sans-serif;">
-      <form method="GET" action="dashboard.php">
-      <select name="limpar_todos" >
-      <option value="1">TODOS</option>
-      <option value="0"> TOP 10</option>
-      </select>
-      <button type="submit">🔍</button>
-    </div>
-
-    <h3 style="text-align: left; "> TODOS ITENS VENDIDOS </h3>
-
-  <div class="row row-cols-1 row-cols-md-5 g-4">    
-    <?php if (count($destaques) > 0 ): ?>
-      <?php foreach ($destaques as $produto):
-        $conta_vendas = 0;
-        foreach ($vendas as $vendas_prod) {
-          if ($vendas_prod['produto_id'] == $produto['id']) {
-            $conta_vendas = $vendas_prod['numero_vendas_itens'];
-            break;
-          }
-        } ?>
-        <div class="produtos-grid">
-          <div class="produto">
-            <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
-              <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="preco">Preço: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
-              <p>ID: <?= $produto['id'] ?></p>
-              <p>Vendidos: <?php echo $produto['qtde'] ?></p>
-          </div> 
-        </div>      
-            <?php endforeach; ?>
-          <?php  if (isset ($_SESSION['todas_vendas'])){?>
-            <?php }?>
-          <?php else: ?>
-              <p>Nenhuma venda ainda.</p>
-          <?php endif; ?>
-<?php } ?>
-
-
-
-
-
-
-
-
-
 </body>
 </html>
