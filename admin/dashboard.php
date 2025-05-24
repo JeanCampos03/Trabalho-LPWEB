@@ -101,7 +101,7 @@ FROM vendasitens")->fetch_assoc();
       <div class="card bg-warning text-dark h-100">
         <div class="card-body">
           <h5 class="card-title">Item Mais Vendido</h5>
-          <p class="card-text"><?= $primeiro['nome'] ?></p>
+          <p class="card-text fs-5"><?= $primeiro['nome'] ?></p>
         </div>
       </div>
     </div>
@@ -109,7 +109,7 @@ FROM vendasitens")->fetch_assoc();
       <div class="card bg-danger text-white h-100">
         <div class="card-body">
           <h5 class="card-title">Item Menos Vendido</h5>
-          <p class="card-text"><?= $ultimo['nome'] ?></p>
+          <p class="card-text fs-5"><?= $ultimo['nome'] ?></p>
         </div>
       </div>
     </div>
