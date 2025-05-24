@@ -280,23 +280,6 @@ box-sizing: border-box;
 background-color: #1a252f;      /* Cor de fundo mais escura ao passar o mouse */
 }
 
-.container-retangulo {
-  display: flex;         /* Coloca os filhos lado a lado */
-  gap: 20px;             /* Espaço entre os retângulos */
-  padding: 20px;         /* Espaço ao redor do container */
-  justify-content: center; /* Centraliza tudo na horizontal */
-  flex-wrap: wrap;       /* Quebra para baixo se não couber na tela */
-}
-
-.retangulo {
-  border: 2px solid #333;       /* borda preta */
-  border-radius: 8px;           /* cantos arredondados */
-  padding: 1px;                /* espaço interno */
-  width: 260px;                 /* largura do retângulo */
-  background-color: #5c5757;   /* fundo claro */
-  justify-content: center;
-  flex-wrap: wrap;
-}
 h1 {
   text-align: center;           /* Centraliza o texto do título <h1> */
   margin-bottom: 30px;          /* Adiciona espaço abaixo do título */
@@ -464,6 +447,7 @@ input[type="number"], .quantidade {
   background-color: #005bb5;  /* Cor de fundo azul mais escura quando o mouse passa por cima */
 }
 
+/*Padrao de botao*/
 .btn {
   padding: 10px 20px;
   border-radius: 5px;
