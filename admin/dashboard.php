@@ -13,22 +13,38 @@ $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasi
                   INNER JOIN produtos ON produtos.id = vendasitens.produto_id
                   GROUP BY produtos.id, produtos.nome, produtos.preco
                   ORDER BY qtde DESC";
-$destaques = $con->query($sql_destaques)->fetch_all(MYSQLI_ASSOC);
+             
+$resultado_destaques = $con->query($sql_destaques);
 
-$primeiro = ['nome' => 'Sem vendas ainda.'];
-$ultimo = ['nome' => 'Sem vendas ainda.'];
+$destaques = [];
+if ($resultado_destaques && $resultado_destaques->num_rows > 0) {
+    foreach ($resultado_destaques as $linha) {
+        $destaques[] = $linha;
+        
+    }
+}
 
-if (count($destaques) > 0) {
-  $primeiro = $destaques[0];
-  $ultimo = $destaques[count($destaques) - 1];
+$top = [];
+if ($resultado_destaques && $resultado_destaques->num_rows > 0) {
+    foreach ($resultado_destaques as $linha) {
+        $top[] = $linha;
+    }
+  $primeiro = $top[0];
+  $ultimo = $top[count($top) - 1];
+
+} else {
+  $primeiro['nome'] = "Sem vendas ainda.";
+  $ultimo['nome'] = "Sem vendas ainda.";
 }
 
 
 $produtos = $con->query("SELECT id, nome, preco FROM produtos")->fetch_all(MYSQLI_ASSOC);
+
 $vendas = $con->query("SELECT vi.produto_id, COUNT(vi.produto_id) AS numero_vendas_itens 
                        FROM vendasitens vi JOIN vendas v ON v.id = vi.venda_id 
                        GROUP BY vi.produto_id 
                        ORDER BY numero_vendas_itens DESC")->fetch_all(MYSQLI_ASSOC);
+
 $total = $con->query("SELECT SUM(p.preco) total_vendas 
                       FROM produtos p 
                       INNER JOIN vendasitens vi ON vi.produto_id = p.id")->fetch_assoc();
@@ -104,27 +120,29 @@ FROM vendasitens")->fetch_assoc();
 
   <h2 class="mb-3">Top 10 Mais Vendidos</h2>
   <div class="row row-cols-1 row-cols-md-5 g-4">
-    <?php foreach ($destaques as $produto): 
-      $conta_vendas = 0;
-      foreach ($vendas as $vendas_prod) {
-        if ($vendas_prod['produto_id'] == $produto['id']) {
-          $conta_vendas = $vendas_prod['numero_vendas_itens'];
-          break;
-        }
-      } ?>
-      <div class="col">
-        <div class="card h-100">
-          <img src="/images/<?= $produto['id'] ?>.png" class="card-img-top" alt="<?= $produto['nome'] ?>">
-          <div class="card-body">
-            <h5 class="card-title"><?= $produto['nome'] ?></h5>
-            <p class="card-text">Preço: R$ <?= number_format($produto['preco'], 1, ',', '.') ?></p>
-            <p class="card-text">ID: <?= $produto['id'] ?></p>
-            <p class="card-text">Vendidos: <?= $conta_vendas ?></p>
-          </div>
+    <?php $i = 0 ; if (count($destaques) > 0 ): ?>
+      <?php foreach ($destaques as $produto):
+        $conta_vendas = 0;
+        foreach ($vendas as $vendas_prod) {
+          if ($vendas_prod['produto_id'] == $produto['id']) {
+            $conta_vendas = $vendas_prod['numero_vendas_itens'];
+            break;
+          }
+        } if ($i < 10) {?>
+        <div class="produtos-grid">
+          <div class="produto">
+            <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
+              <h5 class="card-title"><?= $produto['nome'] ?></h5>
+              <p class="preco">Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
+              <p>ID: <?= $produto['id'] ?></p>
+              <p>Vendidos: <?= $conta_vendas ?></p>
+          </div> 
         </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
-</div>
+        <?php $i++; }?>
+
+            <?php endforeach; ?>
+          <?php else: ?>
+              <p>Nenhuma venda ainda.</p>
+          <?php endif; ?>
 </body>
 </html>
