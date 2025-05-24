@@ -1,600 +1,474 @@
-*/* Remove margens e preenchimentos padrão de todos os elementos, e define box-sizing */
+
+*
+/*Reset Geral e Estilização do body*/
 {
-  margin: 0;                  /* Remove margem padrão dos elementos */
-  padding: 0;                 /* Remove preenchimento padrão dos elementos */
-  box-sizing: border-box;    /* Inclui padding e borda dentro da largura/altura dos elementos */
+margin: 0;                  /* Remove margem padrão dos elementos */
+padding: 0;                 /* Remove preenchimento padrão dos elementos */
+box-sizing: border-box;    /* Inclui padding e borda dentro da largura/altura dos elementos */
 }
 
 body {
-  font-family: 'Arial', sans-serif;   /* Define a fonte principal como Arial */
-  background-color: #f5f5f5;          /* Cor de fundo clara para a página */
-  color: #000000;                        /* Cor do texto (cinza escuro) */
-  padding: 20px; 
-  margin: 0; 
+font-family: 'Arial', sans-serif;   /* Define a fonte principal como Arial */
+background-color: #f5f5f5;          /* Cor de fundo clara para a página */
+color: #000000;                        /* Cor do texto (cinza escuro) */
+padding: 20px; 
+margin: 0; 
 }
 
+/*Topo e Menus*/
 .topo-dashboard {
-  background-color: #a7c6e4; 
-  color: rgb(255, 255, 255);              /* Cor do texto: branco */
-  padding: 10px;             /* Espaçamento interno */
-  text-align: center;        /* Centraliza o texto */
+background-color: #a7c6e4; 
+color: rgb(255, 255, 255);              /* Cor do texto: branco */
+padding: 10px;             /* Espaçamento interno */
+text-align: center;        /* Centraliza o texto */
 }
 
 .topo {
-  background-color: #a7c6e4; /* Cor de fundo escura (azul petróleo) */
-  color: rgb(0, 0, 0);              /* Cor do texto: branco */
-  padding: 1px;             /* Espaçamento interno */
-  text-align: center;        /* Centraliza o texto */
+background-color: #a7c6e4; /* Cor de fundo escura (azul petróleo) */
+color: rgb(0, 0, 0);              /* Cor do texto: branco */
+padding: 1px;             /* Espaçamento interno */
+text-align: center;        /* Centraliza o texto */
 }
 
 .menu-detalhes {
-  list-style: none;          /* Remove os marcadores da lista (<ul>) */
-  display: flex;             /* Usa Flexbox para alinhar os itens */
-  justify-content: left;   /* Centraliza os itens horizontalmente */
-  margin-top: 25px;          /* Espaço acima do menu */
+list-style: none;          /* Remove os marcadores da lista (<ul>) */
+display: flex;             /* Usa Flexbox para alinhar os itens */
+justify-content: left;   /* Centraliza os itens horizontalmente */
+margin-top: 25px;          /* Espaço acima do menu */
 }
 
 .menu-detalhes li {
-  margin: 0 15px;            /* Espaço lateral entre os itens do menu */
-}
-
-.menu-detalhes a {
-  color: white;              /* Cor do link: branco */
-  text-decoration: none;     /* Remove o sublinhado padrão */
-  font-weight: bold;         /* Deixa o texto em negrito */
-}
-
-.menu-detalhes a:hover {
-  text-decoration: underline; /* Sublinha o link ao passar o mouse */
+margin: 0 15px;            /* Espaço lateral entre os itens do menu */
 }
 
 .menu {
-  list-style: none;          /* Remove os marcadores da lista (<ul>) */
-  display: flex;             /* Usa Flexbox para alinhar os itens */
-  justify-content: center;   /* Centraliza os itens horizontalmente */
-  margin-top: 10px;          /* Espaço acima do menu */
+list-style: none;          /* Remove os marcadores da lista (<ul>) */
+display: flex;             /* Usa Flexbox para alinhar os itens */
+justify-content: center;   /* Centraliza os itens horizontalmente */
+margin-top: 10px;          /* Espaço acima do menu */
 }
 
 .menu li {
-  margin: 0 15px;            /* Espaço lateral entre os itens do menu */
+margin: 0 15px;            /* Espaço lateral entre os itens do menu */
 }
 
-.menu a {
-  color: white;              /* Cor do link: branco */
-  text-decoration: none;     /* Remove o sublinhado padrão */
-  font-weight: bold;         /* Deixa o texto em negrito */
+.menu a,
+.menu-detalhes a {
+color: white;              /* Cor do link: branco */
+text-decoration: none;     /* Remove o sublinhado padrão */
+font-weight: bold;         /* Deixa o texto em negrito */
 }
 
-.menu a:hover {
-  text-decoration: underline; /* Sublinha o link ao passar o mouse */
+.menu a:hover,
+.menu-detalhes a:hover {
+text-decoration: underline; /* Sublinha o link ao passar o mouse */
 }
 
+/*Título da Página*/
 .titulo {
-  text-align: center;         /* Centraliza o título */
-  margin: 40px 0 20px;        /* Margem: cima 40px, baixo 20px */
-  font-size: 2rem;            /* Tamanho da fonte (2 vezes o tamanho padrão) */
+text-align: center;         /* Centraliza o título */
+margin: 40px 0 20px;        /* Margem: cima 40px, baixo 20px */
+font-size: 2rem;            /* Tamanho da fonte (2 vezes o tamanho padrão) */
 }
 
+/* Grade de Produtos*/
 .produtos-container {
-  display: flex;              /* Usa Flexbox para organizar os produtos */
-  flex-wrap: wrap;            /* Permite que os produtos quebrem linha */
-  justify-content: center;    /* Centraliza os produtos */
-  gap: 30px;                  /* Espaço entre os produtos */
-  padding: 20px;              /* Espaçamento interno do contêiner */
+display: flex;              /* Usa Flexbox para organizar os produtos */
+flex-wrap: wrap;            /* Permite que os produtos quebrem linha */
+justify-content: center;    /* Centraliza os produtos */
+gap: 30px;                  /* Espaço entre os produtos */
+padding: 20px;              /* Espaçamento interno do contêiner */
 }
 
 .produto {
-  background: #fff;           /* Fundo branco para os cards de produto */
-  padding: 20px;              /* Espaçamento interno */
-  border-radius: 8px;         /* Arredonda os cantos */
-  width: 220px;               /* Largura fixa dos cards */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  text-align: center;         /* Centraliza o conteúdo */
-  transition: transform 0.2s; /* Animação suave ao aplicar transform */
+background: #fff;           /* Fundo branco para os cards de produto */
+padding: 20px;              /* Espaçamento interno */
+border-radius: 8px;         /* Arredonda os cantos */
+width: 220px;               /* Largura fixa dos cards */
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+text-align: center;         /* Centraliza o conteúdo */
+transition: transform 0.2s; /* Animação suave ao aplicar transform */
 }
 
 .produto:hover {
-  transform: translateY(-5px); /* Levanta o card 5px ao passar o mouse */
-}
-
-.produto img {
-  max-width: 100%;            /* Garante que a imagem não ultrapasse a largura do card */
-  margin-bottom: 15px;        /* Espaço abaixo da imagem */
+transform: translateY(-5px); /* Levanta o card 5px ao passar o mouse */
 }
 
 .produto h3 {
-  margin-bottom: 10px;        /* Espaço abaixo do título do produto */
+margin-bottom: 10px;        /* Espaço abaixo do título do produto */
 }
 
-.preco {
-  margin-bottom: 15px;        /* Espaço abaixo da seção de preço */
-}
-
-.preco span {
-  color: orange;              /* Cor do texto do preço */
-  font-weight: bold;          /* Deixa o preço em negrito */
-}
+/*Preço e Botão Comprar*/
 
 .produto a {
-  display: inline-block;      /* Permite aplicar padding e margin no link */
-  padding: 10px 15px;         /* Espaço interno do botão/link */
-  background-color: #007bff;  /* Cor azul padrão do botão */
-  color: white;               /* Cor do texto: branco */
-  text-decoration: none;      /* Remove sublinhado */
-  border-radius: 5px;         /* Arredonda os cantos do botão */
+display: inline-block;      /* Permite aplicar padding e margin no link */
+padding: 10px 15px;         /* Espaço interno do botão/link */
+background-color: #007bff;  /* Cor azul padrão do botão */
+color: white;               /* Cor do texto: branco */
+text-decoration: none;      /* Remove sublinhado */
+border-radius: 5px;         /* Arredonda os cantos do botão */
 }
 
-
+/*Container e Layout Responsivo*/
 .container {
-  display: flex; /* Torna a div 'container' um contêiner flexível, permitindo o uso de layout flex */
-  justify-content: space-between; /* Distribui os elementos nas extremidades (esquerda e direita) */
-  align-items: center; /* Alinha os itens verticalmente ao centro */
-  padding: 10px; /* Adiciona um pequeno espaço de 10px ao redor do conteúdo */
+display: flex; /* Torna a div 'container' um contêiner flexível, permitindo o uso de layout flex */
+justify-content: space-between; /* Distribui os elementos nas extremidades (esquerda e direita) */
+align-items: center; /* Alinha os itens verticalmente ao centro */
+padding: 10px; /* Adiciona um pequeno espaço de 10px ao redor do conteúdo */
 }
 
 .d-flex {
-  display: flex; /* Torna a div 'd-flex' também um contêiner flexível */
-  justify-content: space-between; /* Garante que os itens dentro da div sejam distribuídos entre as extremidades */
-  width: 100%; /* Faz com que a div ocupe 100% da largura disponível, permitindo o espaço adequado entre os itens */
+display: flex; /* Torna a div 'd-flex' também um contêiner flexível */
+justify-content: space-between; /* Garante que os itens dentro da div sejam distribuídos entre as extremidades */
+width: 100%; /* Faz com que a div ocupe 100% da largura disponível, permitindo o espaço adequado entre os itens */
 }
 
 .text-left {
-  margin-right: auto; /* Força o texto do 'span' a se mover para a esquerda, deixando o espaço restante para o botão à direita */
+margin-right: auto; /* Força o texto do 'span' a se mover para a esquerda, deixando o espaço restante para o botão à direita */
 }
 
-.btn-logout {
-  color: white; /* Define a cor do texto do botão como branca */
-  background-color: red; /* Define a cor de fundo do botão como vermelha */
-  padding: 10px 20px; /* Adiciona um espaço de 10px acima e abaixo, e 20px nas laterais, ao redor do texto do botão */
-  text-decoration: none; /* Remove o sublinhado do link */
-  border-radius: 5px; /* Aplica bordas arredondadas no botão */
-}
-
-
+/*Botão de Login*/
 .container-login {
-  display: flex;             /* Torna o container flexível */
-  justify-content: flex-end; /* Alinha o conteúdo (botão) à direita */
-  padding: 10px;             /* Espaço interno opcional */
+display: flex;             /* Torna o container flexível */
+justify-content: flex-end; /* Alinha o conteúdo (botão) à direita */
+padding: 10px;             /* Espaço interno opcional */
 }
 
 .btn-login {
-  color: white;                        /* Cor do texto do botão */
-  background-color: rgb(11, 189, 100); /* Cor de fundo verde */
-  padding: 10px 20px;                 /* Espaço interno do botão */
-  text-decoration: none;              /* Remove sublinhado do link */
-  border-radius: 5px;                 /* Bordas arredondadas */
+background-color: rgb(11, 189, 100); /* Cor de fundo verde */
 }
 
+/*Filtro de Produtos*/
 .container-filtro {
-  display: flex;             /* Torna o container flexível */
-  justify-content: center; /* Alinha o conteúdo (botão) à direita */
-  padding: 10px;
-  gap: 10px
+display: flex;             /* Torna o container flexível */
+justify-content: center; /* Alinha o conteúdo (botão) à direita */
+padding: 10px;
+gap: 10px
 }
 
 .filtro-todos {
-  color: white;                        /* Cor do texto do botão */
-  background-color: rgb(109, 133, 121); /* Cor de fundo verde */
-  padding: 10px 20px;                 /* Espaço interno do botão */
-  text-decoration: none;              /* Remove sublinhado do link */
-  border-radius: 5px;                 /* Bordas arredondadas */
+background-color: rgb(109, 133, 121); /* Cor de fundo verde */
 }
 
-/* Carrossel simples */
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 20px;
-      padding: 20px;
-    }
+/*Grade de Produtos*/
+.produtos-grid {
+  display: flex;                  /* Usa Flexbox para layout em linha */
+  flex-wrap: wrap;               /* Permite quebra de linha entre os produtos */
+  justify-content: center;       /* Centraliza os produtos horizontalmente */
+  gap: 20px;                      /* Espaçamento entre os produtos */
+  padding: 20px;                  /* Espaçamento interno geral */
+}
 
-    .carousel .produto {
-      flex: 0 0 auto;
-      width: 250px;
-      scroll-snap-align: start;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-    }
+.produtos-grid .produto {
+  width: 200px;                   /* Largura de cada card de produto */
+  border: 1px solid #ccc;         /* Borda cinza clara */
+  padding: 10px;                  /* Espaço interno */
+  border-radius: 10px;            /* Cantos arredondados */
+  text-align: center;             /* Centraliza o conteúdo */
+}
 
-    .carousel .produto img {
-      width: 100%;
-      height: auto;
-    }
-
-    .produtos-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .produtos-grid .produto {
-      width: 200px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .produto img {
-      width: 100%;
-      height: auto;
-    }
-
-    .preco {
-      font-weight: bold;
-      color: green;
-    }
-
-    .container-login { 
-      text-align: right; 
-      padding: 10px; 
-    }
-
-    .btn-login { 
-      text-decoration: none; 
-      padding: 8px 12px; 
-      background-color: #333; 
-      color: white; 
-      border-radius: 5px;
-     }
-
-    .titulo { 
-      text-align: center; 
-      margin-top: 20px; font-size: 24px; 
-    }
-
-    .flag-img {
-  width: 24px;
+.produto img {
+  width: 100%;
   height: auto;
-  vertical-align: middle;
+  margin-bottom: 15px;
 }
 
-    .produto-detalhe {
-      display: flex;
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background: #fff;
-    }
-    .produto-detalhe img {
-      max-width: 300px;
-      border-radius: 10px;
-    }
-    .produto-info {
-      margin-left: 30px;
-    }
-    .produto-info h1 {
-      margin-bottom: 10px;
-    }
-    .produto-info p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-    .botao-comprar {
-      padding: 10px 20px;
-      background-color: #0a74da;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    .botao-comprar:hover {
-      background-color: #094ab2;
-    }
 
-    table { 
-      border-collapse: collapse; 
-      width: 100%; 
-      max-width: 700px; 
-      margin-bottom: 30px; 
-    }
-    th, td { 
-      border: 1px solid #ccc; 
-      padding: 12px; 
-      text-align: left; 
-    }
-    th { 
-      background-color: #f0f0f0; 
-    }
-    .total { 
-      font-size: 18px; 
-      font-weight: bold; 
-      text-align: right; 
-    }
-    a.botao { 
-      padding: 8px 16px; 
-      background: #28a745; 
-      color: white; 
-      text-decoration: none; 
-      border-radius: 4px; 
-    }
+.preco {
+  font-weight: bold;              /* Deixa o preço em negrito */
+  color: green;                   /* Cor verde (para dar destaque positivo) */
+}
 
-    table { 
-      border-collapse: collapse; 
-      width: 100%; 
-      max-width: 700px; 
-      margin-bottom: 30px; 
-    }
+/* Detalhes do Produto*/
+.produto-detalhe {
+  display: flex;                 /* Layout lado a lado */
+  max-width: 900px;              /* Largura máxima da seção */
+  margin: 50px auto;             /* Centraliza na página com margem vertical */
+  padding: 20px;                 /* Espaço interno */
+  border: 1px solid #ddd;        /* Borda cinza clara */
+  border-radius: 10px;           /* Cantos arredondados */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra leve */
+  background: #fff;              /* Fundo branco */
+}
 
-    th, td { 
-      border: 1px solid #ccc; 
-      padding: 12px; 
-      text-align: left; 
-    }
+.produto-detalhe img {
+  max-width: 300px;              /* Largura máxima da imagem */
+  border-radius: 10px;           /* Cantos arredondados na imagem */
+}
 
-    th { 
-      background-color: #f0f0f0; 
-    }
+.produto-info {
+  margin-left: 30px;             /* Espaço à esquerda do texto ao lado da imagem */
+}
 
-    .total { 
-      font-size: 18px; 
-      font-weight: bold; 
-      text-align: right; 
-    }
+.produto-info h1 {
+  margin-bottom: 10px;           /* Espaço abaixo do título */
+}
 
-    a.botao { 
-      padding: 8px 16px; 
-      background: #28a745; 
-      color: white; 
-      text-decoration: none; 
-      border-radius: 4px; 
-    }
+.produto-info p {
+  font-size: 18px;               /* Tamanho da fonte para a descrição */
+  margin-bottom: 20px;           /* Espaço abaixo do parágrafo */
+}
 
+.botao-comprar {
+  padding: 10px 20px;            /* Espaçamento interno do botão */
+  background-color: #0a74da;     /* Cor de fundo azul */
+  color: #fff;                   /* Texto branco */
+  text-decoration: none;         /* Remove sublinhado */
+  border-radius: 5px;            /* Cantos arredondados */
+  font-size: 16px;               /* Tamanho da fonte */
+}
+
+.botao-comprar:hover {
+  background-color: #094ab2;     /* Cor mais escura no hover */
+}
+
+/*Tabela de Itens*/
+table { 
+  border-collapse: collapse;     /* Junta as bordas da tabela */
+  width: 100%;                   /* Ocupa toda a largura disponível */
+  max-width: 700px;              /* Largura máxima */
+  margin-bottom: 30px;           /* Espaço abaixo da tabela */
+}
+
+th, td { 
+  border: 1px solid #ccc;        /* Borda para cada célula */
+  padding: 12px;                 /* Espaçamento interno */
+  text-align: left;              /* Alinha o texto à esquerda */
+}
+
+th { 
+  background-color: #f0f0f0;     /* Cor de fundo para o cabeçalho */
+}
 
 .container-login-admin {
-  display: flex;             /* Ativa o modelo Flexbox para o container */
-  justify-content: center;   /* Centraliza o conteúdo na horizontal */
-  align-items: center;       /* Centraliza o conteúdo na vertical */
-  height: 100vh;             /* Altura igual à altura total da janela (viewport) */
-  background-color: #f0f0f0; /* Define uma cor de fundo clara */
+display: flex;             /* Ativa o modelo Flexbox para o container */
+justify-content: center;   /* Centraliza o conteúdo na horizontal */
+align-items: center;       /* Centraliza o conteúdo na vertical */
+height: 100vh;             /* Altura igual à altura total da janela (viewport) */
+background-color: #f0f0f0; /* Define uma cor de fundo clara */
 }
 
 
 .form-login-admin {
-  background-color: white;               /* Fundo branco para o formulário */
-  padding: 40px;                         /* Espaço interno em todos os lados */
-  border-radius: 10px;                   /* Bordas arredondadas */
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);   /* Sombra leve ao redor do formulário */
-  text-align: center;                    /* Centraliza texto e elementos internos */
-  width: 300px;                          /* Largura fixa do formulário */
+background-color: white;               /* Fundo branco para o formulário */
+padding: 40px;                         /* Espaço interno em todos os lados */
+border-radius: 10px;                   /* Bordas arredondadas */
+box-shadow: 0 0 15px rgba(0,0,0,0.1);   /* Sombra leve ao redor do formulário */
+text-align: center;                    /* Centraliza texto e elementos internos */
+width: 300px;                          /* Largura fixa do formulário */
 }
 
 
 .form-login-admin input[type="text"],
 .form-login-admin input[type="password"] {
-  width: 100%;           /* Faz o input ocupar 100% da largura do form */
-  padding: 10px;         /* Espaçamento interno dentro dos campos */
-  margin: 10px 0;        /* Espaço acima e abaixo dos campos */
+width: 100%;           /* Faz o input ocupar 100% da largura do form */
+padding: 10px;         /* Espaçamento interno dentro dos campos */
+margin: 10px 0;        /* Espaço acima e abaixo dos campos */
 }
 
 
 .input-login-admin {
- display: inline-block;          /* Permite definir padding e margin */
-  margin: 10px 5px 0 5px;         /* Espaço ao redor do botão/link */
-  padding: 10px 20px;             /* Espaçamento interno do botão */
-  background-color: #2c3e50;      /* Cor de fundo escura */
-  color: white;                   /* Cor do texto branca */
-  text-decoration: none;          /* Remove sublinhado (em caso de link) */
-  border: none;                   /* Remove borda (caso seja botão) */
-  border-radius: 5px;             /* Bordas arredondadas */
-  cursor: pointer;                /* Cursor em forma de mão ao passar o mouse */
-  box-sizing: border-box;
+display: inline-block;          /* Permite definir padding e margin */
+margin: 10px 5px 0 5px;         /* Espaço ao redor do botão/link */
+background-color: #2c3e50;      /* Cor de fundo escura */
+border: none;                   /* Remove borda (caso seja botão) */
+cursor: pointer;                /* Cursor em forma de mão ao passar o mouse */
+box-sizing: border-box;
 }
 
 .input-login-admin:hover {
-  background-color: #1a252f;      /* Cor de fundo mais escura ao passar o mouse */
+background-color: #1a252f;      /* Cor de fundo mais escura ao passar o mouse */
 }
 
-    .container-retangulo {
-      display: flex;         /* Coloca os filhos lado a lado */
-      gap: 20px;             /* Espaço entre os retângulos */
-      padding: 20px;         /* Espaço ao redor do container */
-      justify-content: center; /* Centraliza tudo na horizontal */
-      flex-wrap: wrap;       /* Quebra para baixo se não couber na tela */
-    }
+.container-retangulo {
+  display: flex;         /* Coloca os filhos lado a lado */
+  gap: 20px;             /* Espaço entre os retângulos */
+  padding: 20px;         /* Espaço ao redor do container */
+  justify-content: center; /* Centraliza tudo na horizontal */
+  flex-wrap: wrap;       /* Quebra para baixo se não couber na tela */
+}
 
 .retangulo {
-      border: 2px solid #333;       /* borda preta */
-      border-radius: 8px;           /* cantos arredondados */
-      padding: 1px;                /* espaço interno */
-      width: 260px;                 /* largura do retângulo */
-      background-color: #5c5757;   /* fundo claro */
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fafafa;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
+  border: 2px solid #333;       /* borda preta */
+  border-radius: 8px;           /* cantos arredondados */
+  padding: 1px;                /* espaço interno */
+  width: 260px;                 /* largura do retângulo */
+  background-color: #5c5757;   /* fundo claro */
+  justify-content: center;
+  flex-wrap: wrap;
+}
+h1 {
+  text-align: center;           /* Centraliza o texto do título <h1> */
+  margin-bottom: 30px;          /* Adiciona espaço abaixo do título */
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+tr:last-child td {
+  border-bottom: none;          /* Remove a borda inferior da última linha da tabela */
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
+input[type="hidden"] {
+  display: none;                /* Esconde inputs do tipo hidden (não aparecem na tela) */
+}
 
-    th, td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
+.total {
+  font-size: 1.2em;             /* Aumenta o tamanho da fonte em 20% */
+  font-weight: bold;           /* Deixa o texto em negrito */
+  margin-top: 20px;            /* Espaço acima do elemento */
+  text-align: right;           /* Alinha o conteúdo à direita */
+}
 
-    th {
-      background-color: #f7f7f7;
-      font-weight: bold;
-    }
+.botao {
+  background-color: #9333ea;   /* Cor de fundo roxa */
+  border: none;                /* Sem borda */
+  font-size: 1em;              /* Tamanho da fonte padrão */
+  cursor: pointer;            /* Cursor vira mãozinha ao passar por cima */
+  margin-top: 20px;            /* Espaço acima do botão */
+  float: right;                /* Faz o botão flutuar à direita */
+  transition: background-color 0.3s;  /* Suaviza a transição de cor ao passar o mouse */
+}
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+.botao:hover {
+  background-color: #7a26c2;   /* Cor de fundo um pouco mais escura ao passar o mouse */
+}
 
-    input[type="hidden"] {
-      display: none;
-    }
+.botao p {
+  margin: 10px 0;              /* Margem vertical de 10px para parágrafos dentro do botão */
+}
 
-    .total {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-top: 20px;
-      text-align: right;
-    }
+.botao a {
+  color: purple;               /* Links dentro do botão ficam roxos */
+  text-decoration: underline; /* Sublinha os links */
+}
 
-    .botao {
-      background-color: #9333ea;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 6px;
-      font-size: 1em;
-      cursor: pointer;
-      margin-top: 20px;
-      float: right;
-      transition: background-color 0.3s;
-    }
+input[type="number"], .quantidade {
+  width: 60px;                 /* Largura fixa de 60px */
+  text-align: center;          /* Texto centralizado dentro do campo */
+}
 
-    .botao:hover {
-      background-color: #7a26c2;
-    }
+.quantidade-btn {
+  display: inline-block;       /* Elemento fica em linha, mas com possibilidade de definir altura e largura */
+  width: 28px;                 /* Largura do botão de quantidade */
+  height: 28px;                /* Altura do botão */
+  text-align: center;          /* Centraliza o texto horizontalmente */
+  line-height: 26px;           /* Centraliza verticalmente o texto */
+  border: 1px solid #ccc;      /* Borda cinza clara */
+  border-radius: 4px;          /* Cantos arredondados */
+  background: #fff;            /* Fundo branco */
+  cursor: pointer;             /* Cursor de ponteiro (mão) */
+  font-weight: bold;           /* Texto em negrito */
+  margin: 0 5px;               /* Espaço horizontal de 5px entre os botões */
+}
 
-    .botao p {
-      margin: 10px 0;
-    }
+.checkbox {
+  margin-top: 10px;            /* Espaço acima de checkboxes */
+}
 
-    .botao a {
-      color: purple;
-      text-decoration: underline;
-    }
+/* Layout Flex */
+.layout {
+  display: flex;               /* Layout em linha usando Flexbox */
+  gap: 20px;                   /* Espaçamento entre os elementos filhos */
+}
 
-    input[type="number"], .quantidade {
-      width: 60px;
-      text-align: center;
-    }
+/* Menu lateral fixo */
+.menu-categorias {
+  width: 200px;                /* Largura fixa do menu */
+  padding: 10px;               /* Espaçamento interno */
+  border-right: 1px solid #ccc;/* Borda à direita para separar visualmente do conteúdo */
+  overflow-y: auto;            /* Adiciona rolagem vertical se o conteúdo for maior que o menu */
+  max-height: 80vh;            /* Altura máxima de 80% da altura da tela */
+  position: sticky;            /* Faz o menu "grudar" ao rolar a página */
+  top: 10px;                   /* Distância do topo ao grudar */
+  background-color: #f9f9f9;   /* Cor de fundo clara */
+}
 
-    .quantidade-btn {
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      text-align: center;
-      line-height: 26px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: #fff;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 0 5px;
-    }
+.menu-categorias h3 {
+  margin-top: 0;               /* Remove margem acima do título */
+  margin-bottom: 15px;         /* Espaço abaixo do título */
+}
 
-    .checkbox {
-      margin-top: 10px;
-    }
+.menu-categorias form {
+  margin-bottom: 10px;         /* Espaço entre os formulários do menu */
+}
 
-    /* Layout Flex */
-    .layout {
-      display: flex;
-      gap: 20px;
-    }
+.menu-categorias-button {
+  text-decoration: none;       /* Remove sublinhado do texto */
+  color: #000000;              /* Cor do texto preta */
+  width: 100%;                 /* Ocupa toda a largura disponível */
+  padding: 8px;                /* Espaçamento interno */
+  background-color: #eee;      /* Fundo cinza claro */
+  border: 1px solid #ccc;      /* Borda cinza clara */
+  cursor: pointer;             /* Cursor de ponteiro */
+  font-size: 14px;             /* Tamanho da fonte */
+  transition: background-color 0.3s; /* Suaviza a transição de cor */
+}
 
-    /* Menu lateral fixo */
-    .menu-categorias {
-      width: 200px;
-      padding: 10px;
-      border-right: 1px solid #ccc;
-      overflow-y: auto;
-      max-height: 80vh;
-      position: sticky;
-      top: 10px;
-      background-color: #f9f9f9;
-    }
-    .menu-categorias h3 {
-      margin-top: 0;
-      margin-bottom: 15px;
-    }
-    .menu-categorias form {
-      margin-bottom: 10px;
-    }
-    .menu-categorias-button {
-      text-decoration: none;  
-      color: #000000;  
-      width: 100%;
-      padding: 8px;
-      background-color: #eee;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s;
-    }
-    .menu-categorias-button:hover {
-      background-color: #ddd;
-    }
+.menu-categorias-button:hover {
+  background-color: #ddd;      /* Cor de fundo mais escura ao passar o mouse */
+}
 
-    /* Conteúdo principal */
-    .conteudo {
-      flex: 1;
-      padding: 20px 0;
-    }
 
-    /* Grid produtos */
-    .produtos-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      
-    }
-    .produto {
-      border: 1px solid #ccc;
-      padding: 10px;
-      width: 180px;
-      text-align: center;
-      background-color: #fff;
-      border-radius: 4px;
-      box-shadow: 0 0 4px rgba(0,0,0,0.1);
-    }
-    .produto img {
-       width: 180px;        
-       height: 180px;       
-       object-fit: cover;   
-       border-radius: 4px;  /* opcional: bordas arredondadas */
-       display: block;
-       margin: 0 auto 8px auto;
-    }
-    .produto h3 {
-      margin: 8px 0;
-      font-size: 16px;
-    }
-    .produto .preco {
-      color: #b12704;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-    .produto a {
-      display: inline-block;
-      padding: 6px 12px;
-      background-color: #0071dc;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 3px;
-      font-size: 14px;
-    }
-    .produto a:hover {
-      background-color: #005bb5;
-    }
+/* Conteúdo principal */
+.conteudo {
+  flex: 1;
+  padding: 20px 0;
+}
+
+/* Grid produtos */
+.produtos-grid {
+  display: flex;          /* Organiza os produtos em linha com Flexbox */
+  flex-wrap: wrap;        /* Permite que os itens "quebrem linha" se não couberem */
+  gap: 15px;              /* Espaçamento de 15px entre os produtos */
+}
+
+.produto {
+  border: 1px solid #ccc;                     /* Borda cinza clara ao redor do produto */
+  padding: 10px;                              /* Espaço interno de 10px */
+  width: 180px;                               /* Largura fixa do card de produto */
+  text-align: center;                         /* Centraliza o conteúdo do card */
+  background-color: #fff;                     /* Fundo branco */
+  border-radius: 4px;                         /* Cantos arredondados */
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);         /* Sombra leve ao redor do card */
+}
+
+.produto img {
+  width: 180px;                               /* Largura fixa da imagem igual à do card */
+  height: 180px;                              /* Altura fixa para uniformidade */
+  object-fit: cover;                          /* Corta/encaixa a imagem para cobrir o espaço sem deformar */
+  border-radius: 4px;                         /* Bordas arredondadas na imagem (opcional, mas elegante) */
+  display: block;                             /* Faz a imagem se comportar como bloco (evita espaços indesejados) */
+  margin: 0 auto 8px auto;                    /* Centraliza horizontalmente e adiciona 8px abaixo */
+}
+
+.produto h3 {
+  margin: 8px 0;              /* Espaço de 8px acima e abaixo do título <h3> do produto */
+  font-size: 16px;            /* Define o tamanho da fonte do título como 16px */
+}
+
+.produto .preco {
+  color: #b12704;             /* Define a cor do texto do preço (vermelho característico da Amazon) */
+  font-weight: bold;          /* Deixa o preço em negrito */
+  margin-bottom: 8px;         /* Espaço de 8px abaixo do preço */
+}
+
+.produto a {
+  display: inline-block;      /* Permite definir largura, altura e aplicar padding no link */
+  padding: 6px 12px;          /* Espaço interno: 6px vertical, 12px horizontal */
+  background-color: #0071dc;  /* Cor de fundo azul (semelhante ao azul do botão da Amazon) */
+  color: #fff;                /* Cor do texto branca */
+  text-decoration: none;      /* Remove o sublinhado do link */
+  border-radius: 3px;         /* Arredonda levemente os cantos do botão */
+  font-size: 14px;            /* Define o tamanho da fonte do link */
+}
+
+.produto a:hover {
+  background-color: #005bb5;  /* Cor de fundo azul mais escura quando o mouse passa por cima */
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+}

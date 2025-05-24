@@ -31,8 +31,8 @@ if (mysqli_num_rows($resultado) != 1 ) {
         <span> SENHA : </span>
         <input type="password" name="senha" /><br><br>
 
-        <a href="/Area_Publica/index.php" class="input-login-admin">Voltar</a>
-        <input type="submit" value="Logar" class="input-login-admin" />
+        <a href="/Area_Publica/index.php" class="btn input-login-admin">Voltar</a>
+        <input type="submit" value="Logar" class="btn input-login-admin" />
     </form>
 </div>
 

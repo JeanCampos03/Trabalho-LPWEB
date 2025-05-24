@@ -8,8 +8,8 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
 include('../admin/banco.php');
 $logado = $_SESSION['usuario'];
 
-if (isset($_GET['limpar_todos']) ) {
-    if (($_GET['limpar_todos'] == 1)) {
+if (isset($_GET['todos']) ) {
+    if (($_GET['todos'] == 1)) {
         $_SESSION['todas_vendas'] = true;
     } else {
         $_SESSION['todas_vendas'] = null;
@@ -69,6 +69,7 @@ FROM vendasitens")->fetch_assoc();
   <link rel="icon" href="/images/title.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
 </head>
 <body class="bg-light">
 <div class="container py-4">
@@ -132,7 +133,7 @@ FROM vendasitens")->fetch_assoc();
 <!-- Cria uma combobox para exibir o top 10 ou todos os produtos vendidos --> 
     <div style="text-align: right; font-family: 'Arial', sans-serif;">
       <form method="GET" action="dashboard.php">
-      <select name="limpar_todos" >
+      <select name="todos" >
       <option value="0"> TOP 10</option>
       <option value="1">TODOS</option>
       </select>
@@ -151,11 +152,11 @@ FROM vendasitens")->fetch_assoc();
             break;
           }
         } if ($i < 10) {?>
-        <div class="produtos-grid">
-          <div class="produto">
+        <div>
+          <div>
             <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
               <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="preco">Valor vendido: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
+              <p> Valor vendido: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
               <p>ID: <?= $produto['id'] ?></p>
               <p>Vendidos: <?php echo $produto['qtde'] ?></p>
           </div> 
@@ -175,7 +176,7 @@ FROM vendasitens")->fetch_assoc();
 
     <div style="text-align: right; font-family: 'Arial', sans-serif;">
       <form method="GET" action="dashboard.php">
-      <select name="limpar_todos" >
+      <select name="todos" >
       <option value="1">TODOS</option>
       <option value="0"> TOP 10</option>
       </select>
@@ -194,11 +195,11 @@ FROM vendasitens")->fetch_assoc();
             break;
           }
         } ?>
-        <div class="produtos-grid">
-          <div class="produto">
+        <div>
+          <div>
             <img src="/images/<?php echo $produto['id'] ?>.png" class="card-img-top" alt="<?php echo $produto['nome'] ?>">
               <h5 class="card-title"><?= $produto['nome'] ?></h5>
-              <p class="preco">Valor Vendido: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
+              <p>Valor Vendido: R$ <?= number_format($produto['preco'] * $produto['qtde'], 2, ',', '.') ?></p>
               <p>ID: <?= $produto['id'] ?></p>
               <p>Vendidos: <?php echo $produto['qtde'] ?></p>
           </div> 
