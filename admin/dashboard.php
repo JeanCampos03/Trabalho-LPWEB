@@ -8,8 +8,6 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])) {
 include('../admin/banco.php');
 $logado = $_SESSION['usuario'];
 
-
-
 if (isset($_GET['limpar_todos']) ) {
     if (($_GET['limpar_todos'] == 1)) {
         $_SESSION['todas_vendas'] = true;
@@ -18,8 +16,6 @@ if (isset($_GET['limpar_todos']) ) {
 
     }
 }
-
-
 
 $sql_destaques = "SELECT produtos.id, produtos.nome, produtos.preco, SUM(vendasitens.quantidade) AS qtde
                   FROM vendasitens
