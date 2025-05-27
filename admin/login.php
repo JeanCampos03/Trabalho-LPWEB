@@ -15,7 +15,7 @@ if (mysqli_num_rows($resultado) != 1 ) {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <title>LOGIN ADM</title>
+    <title>Login Admin</title>
     <link rel="icon" type="image/png" href="/images/title.png">
     <link rel="stylesheet" href="/css/styles.css">
 </head>

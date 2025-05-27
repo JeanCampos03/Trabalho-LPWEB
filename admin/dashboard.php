@@ -65,7 +65,7 @@ FROM vendasitens")->fetch_assoc();
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>FUT CAMISAS - Dashboard</title>
+  <title>Fut Camisas | Dashboard</title>
   <link rel="icon" href="/images/title.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -163,12 +163,6 @@ FROM vendasitens")->fetch_assoc();
         </div>
         <?php $i++; } ?>        
             <?php endforeach; ?>
-           <?php var_dump($_SESSION['todas_vendas']);?>
-          <?php  if (isset ($_SESSION['todas_vendas'])){?>
-            <?php echo "oiii";?>
-
-            <?php }?>
-
           <?php else: ?>
               <p>Nenhuma venda ainda.</p>
           <?php endif; ?>
@@ -205,8 +199,6 @@ FROM vendasitens")->fetch_assoc();
           </div> 
         </div>      
             <?php endforeach; ?>
-          <?php  if (isset ($_SESSION['todas_vendas'])){?>
-            <?php }?>
           <?php else: ?>
               <p>Nenhuma venda ainda.</p>
           <?php endif; ?>

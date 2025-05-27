@@ -45,7 +45,9 @@ if (isset($_POST['voltar'])) {
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Carrinho</title>
+  <title>Carrinho De Compras </title>
+  <link rel="icon" type="image/png" href="/images/title.png">
+
   <style>
     body { font-family: Arial, sans-serif; background-color: #fafafa; margin: 0; padding: 20px; color: #333; }
     h1 { text-align: center; margin-bottom: 30px; }

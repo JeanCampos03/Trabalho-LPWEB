@@ -43,6 +43,7 @@ $resultT = $con->query($t);
 <head>
   <meta charset="UTF-8">
   <title>Alterar Produto <?= htmlspecialchars($dados["id"]) ?></title>
+  <link rel="icon" type="image/png" href="/images/title.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <style>
     body {

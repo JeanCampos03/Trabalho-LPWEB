@@ -36,7 +36,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>FUT CAMISAS</title>
+  <title>Fut Camisas | Área Pública</title>
   <link rel="icon" type="image/png" href="/images/title.png">
   <link rel="stylesheet" href="/css/styles.css">
 </head>

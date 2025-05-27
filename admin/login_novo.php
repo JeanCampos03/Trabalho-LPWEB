@@ -16,6 +16,6 @@
         
         <span> SENHA : </span>
         <input type="password" name="senha" /><br><br>
-        <input type="submit" value="Criar" class="input-login-admin" />
+        <input type="submit" value="Criar" class="btn input-login-admin" />
     </form>
 </div>
