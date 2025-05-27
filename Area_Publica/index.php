@@ -43,6 +43,7 @@ if ($resultado_todos && $resultado_todos->num_rows > 0) {
 <body>
 
 <div class="container-login">
+  <a href="carrinho.php" class="btn btn-login">🛒</a>
   <a href="/admin/login.php" class="btn btn-login">Login</a>
 </div>
 
