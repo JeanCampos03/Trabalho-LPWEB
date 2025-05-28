@@ -9,8 +9,7 @@ if ((!isset($_SESSION['usuario']) == true) && (!isset($_SESSION['senha']) == tru
 $t = "SELECT DISTINCT id, nome FROM categorias";
 $resultT = $con->query($t);
 
-$form = $_SESSION['form_data'] ?? [
-    'idproduto' => '',
+$form = $_SESSION['form_data'] ?? [    
     'descricao' => '',
     'preco' => '',
     'categoria_id' => ''
@@ -43,11 +42,14 @@ $form = $_SESSION['form_data'] ?? [
   <div class="container-form">
     <h1 class="text-center">Cadastro de Produtos</h1>
 
-    <form action="produtos_cadastrar_salvar.php" method="post">
-      <div class="form-group">
-        <label>ID do Produto:</label>
-        <input type="text" name="idproduto" class="form-control" value="<?= htmlspecialchars($form['idproduto']) ?>">
+    <?php if (isset($_SESSION['error_message'])): ?> <!-- Exibe mensagem de erro-->
+      <div class="alert alert-danger">
+        <?= $_SESSION['error_message'] ?>
+        <?php unset($_SESSION['error_message']); ?>
       </div>
+    <?php endif; ?>
+
+    <form action="produtos_cadastrar_salvar.php" method="post">      
 
       <div class="form-group">
         <label>Descrição:</label>
